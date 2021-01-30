@@ -1,0 +1,16 @@
+RepairKeys:
+  Epic:
+    Key: '&5Epic Repair Key'
+    Item: '&5Epic Item'
+  Legendary:
+    Key: '&6Legendary Repair Key'
+    Item: '&6Legendary Item'
+  Mythic:
+    Key: '&cMythic Repair Key'
+    Item: '&cMythic Item'
+Messages:
+  insufficient-permission: '&4Error: &cInsufficient Permission'
+  prefix: '&f[&aRepair&eKeys&f]&r'
+  unknown-rarity: '&4Error: &cUnknown Rarity'
+  player-not-found: '&4Error: &cPlayer Not Found'
+  no-key: '&4Error: &cYou must be holding a key to use this'

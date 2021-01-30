@@ -1,0 +1,30 @@
+# logarithmic-player-to-item-inputs
+# itemsDropped = <StartingCrateItems> + log2(Online-Players)
+# 20 Ticks/Second | Default: 5 Mins
+Settings:
+  StartingCrateItems: 5
+  TicksPerCrateSpawn: 72000
+  TicksForCrateUnlock: 18000
+  CrateName: '&eMagic Crate'
+  
+# %prefix% will be replaced with the prefix defined below
+Messages:
+  prefix: '&f[&6AredoCrates&f]'
+  reload-success: '%prefix% &aConfig reloaded!'
+  skiptimer-success: '%prefix% &aTimer Skipped!'
+  skiptimer-fail: '%prefix% &cTimer Failed to Skip!'
+  loottable-add-success: '%prefix% &aItem Added to Loottable'
+  loottable-remove-success: '%prefix% &aItem Removed from Loottable'
+  loottable-open-success: '%prefix% &aOpening Loottable...'
+  location-add-success: '%prefix% &aLocation Added to Location List'
+  location-remove-success: '%prefix% &aLocation Removed from Location List'
+  loottable-empty: '%prefix% &cLoottable is Empty'
+  locations-empty: '%prefix% &cLocation List is Empty'
+  unknown-location: '%prefix% &cUnknown Location'
+  item-not-in-loottable: '%prefix% &cItem Not Found'
+  unknown-command: '&4Error: &cUnknown Command'
+  insufficient-permission: '&4Error: &cInsufficient Permission'
+  must-specify-player: '&4Error: &cNo Player Specified'
+  incorrect-format: '&4Error: &cIncorrect format, try: /ac help'
+  empty-hand: '&4Error: &cYou must be holding an item to run this command'
+  no-console: 'Error: Console cannot use this command'

@@ -1,0 +1,13 @@
+main: me.LoneSurvivor.KeepInventory.KeepInventory
+name: KeepInventory
+version: 1.0
+author: LoneSurvivor
+api-version: 1.16
+
+commands:
+  ki:
+    description: The PerPlayerKeepInventory command
+    usage: /<command>
+  keepinventory:
+    description: The PerPlayerKeepInventory command
+    usage: /<command>

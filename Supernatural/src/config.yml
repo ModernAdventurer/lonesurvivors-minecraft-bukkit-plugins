@@ -1,0 +1,151 @@
+StartingClass: 'Human'
+StartingMagic: 10000
+magicCap: 10000
+# The amount of recruiting items a player can make (Moonflower Potion, etc) -1 removes the limit
+recruitingItemLimit: 1
+
+Messages:
+  prefix: '&f[&6Super&bnatural&f]'
+  #errors
+  unknown-command: '&4Error: &cUnknown Command'
+  insufficient-permission: '&4Error: &cInsufficient Permission'
+  must-specify-player: '&4Error: &cNo Player Specified'
+  invalid-bounty: '&4Error: &cInvalid Bounty'
+  no-console: 'Error: Console cannot use this command'
+  insufficient-balance: '%prefix% &cInsufficient funds'
+  insufficient-magic: '%prefix% &cInsufficient Magic'
+  insufficient-hunger: '%prefix% &cInsufficient Hunger'
+  target-must-be-supernatural: '%prefix% &cTarget must be in a Supernatural type Class'
+  no-bounty-on-self: '%prefix% &cYou cant put a bounty on your self'
+  teleport-failure: '&4Error: &cNo teleport location set!'
+  #general
+  reload-success: '%prefix% &aConfig reloaded!'
+  only-supernaturals: '%prefix% &cYou can only %spellname% supernaturals'
+  unknown-race: '%prefix% &cUnknown race'
+  setrace-success: '%prefix% &aYou are now a %class%'
+  cured-first: '%prefix% &cYou must be cured before becoming a %class%'
+  already-class: '%prefix% &cYou are already a %class%'
+  cooldown: '%prefix% &cThis ability is on cooldown...'
+  #infection
+  supernatural-infection-infector: '%prefix% &aYou infected %victim% with the %class% disease'
+  supernatural-infection-infected: '%prefix% &aYou have been infected with the %class% disease'
+  #restrictions
+  vampire-wooden-object: '%prefix% &cVampires cannot attack with Wooden Objects'
+  necromancer-netherite-object: '%prefix% &cNecromancers can only attack with Netherite Objects'
+  witchhunter-melee-object: '%prefix% &cWitch Hunters cannot attack with Melee Weapons'
+  vampire-no-eat: '%prefix% &cVampires cannot eat food'
+  night-only-abilities: '%prefix% &cYou cannot use abilities during the day'
+  recruiting-item-limit: '%prefix% &cYou have reached the limit for the amount of this type of recruiting item you can make!'
+  witchhunter-only-command: '%prefix% &cYou must be a Witch Hunter to use this command'
+  #followers
+  follower-follow: '%prefix% &6This follower is now following you'
+  follower-wait: '%prefix% &6This follower is now waiting for you'
+  #bounties
+  no-bounty: '%prefix% &cThis player doesnt have a bounty placed on them'
+  bounty-notify-sender: '%prefix% &6You put a bounty of %bounty%$ on %target% after the tax rate of %percenttax%% was subtracted from your total bounty")'
+  bounty-notify-target: '%prefix% &6%player% put a bounty of %bounty%$ on you.'
+  bounty-notify-all: '%prefix% &6%player% put a bounty of %bounty%$ on %target%'
+  bounty-get: '%prefix% &6%target% has a bounty of %bounty%$ on them'
+  redeem-bounty: '%prefix% &6You redeemed the %bounty%$ bounty placed on %target%'
+  #exorcise spell
+  exorcism-success-target: '%prefix% &aYou have been exorcised'
+  exorcism-success-sender: '%prefix% &aYou successfully exorcised %target%!'
+  #banish spell
+  banishment-success-target: '%prefix% &aYou have been banished'
+  banishment-success-sender: '%prefix% &aYou successfully banished %target%!'
+  no-banish-location: '%prefix% &cBanish Location not set!'
+  #teleport spell
+  set-teleport-location: '%prefix% &6Teleport Location Set'
+  teleport-success: '%prefix% &6Teleporting...'
+  #drain spell
+  target-no-magic: '%prefix% &cTarget has no magic'
+  #Heal Human Spell
+  full-health: '%prefix% &c%target% is already at full health'
+  heal-received: '%prefix% &6You were healed by %player%'
+  target-healed: '%prefix% &6Successfully healed %target%'
+  #Guardian Angel
+  guardian-angel-failed-sender: '%prefix% &c%target% already has the Guardian Angel effect applied'
+  guardian-angel-failed-target: '%prefix% &c%Player% tried to give you the Guardian Angel effect but you already have it'
+  guardian-angel-succeeded-sender: '%prefix% &6Guardian Angel effect applied to %target%'
+  guardian-angel-succeeded-target: '%prefix% &6%Player% gave your the Guardian Angel effect'
+  guardian-angel-use: '%prefix% &6The Guardian Angel Effect Saved You!'
+  #Ressurection Spawn
+  set-ressurection-location: '%prefix% &6Ressurection Location Set'
+  go-ressurection-location: '%prefix% &6Teleporting to Ressurection Location'
+  #alter messages
+  holy-donate-only: '%prefix% &6You must be a Holy Class to donate to church'
+  necromancer-donate-only: '%prefix% &6You must be a Necromancer to donate to church'
+  witchhunter-use-only: '%prefix% &6You must be a Witch Hunter to use this'
+  witchhunter-only-command: '%prefix% &6You must be a Witch Hunter to run this command'
+PercentInfectionChances:
+  Death-By-Supernatural: 12.5
+  Death-By-Lava: 12.5
+  Death-In-Nether: 10
+  Death-By-Wolf: 10
+  Death-By-Bat: 10
+  Death-By-Monster: 10
+  Eating-Rotten-Flesh: 1
+Prefixes:
+  Human: '&f[&aHuman&f]'
+  Vampire: '&f[&cVampire&f]'
+  Werewolf: '&f[&8Werewolf&f]'
+  Ghoul: '&f[&6Ghoul&f]'
+  Demon: '&f[&4Demon&f]'
+  Priest: '&f[&ePriest&f]'
+  Necromancer: '&f[&1Necromancer&f]'
+  WitchHunter: '&f[&5Witchhunter&f]'
+  Angel: '&f[&eAngel&f]'
+  Shade: '&f[&7Shade&f]'
+  Siren: '&f[&3Siren&f]'
+  EarthElemental: '&f[&2Earth Elemental&f]'
+  WaterElemental: '&f[&bWater Elemental&f]'
+  FireElemental: '&f[&6Fire Elemental&f]'
+      
+SpellCosts:
+  # Vampire
+  Teleport: 9000
+  High-Jump: 1000
+  BloodVial: 500
+  Bloodrose: 10000
+  Regeneration: 200
+  Water-Breathing: 15
+  # Werewolf
+  Summon-Wolf: 4000
+  Dash: 400
+  Moonflower: 10000
+  # Ghoul
+  Summon-Monster: 1000
+  Unholy-Bond: 5000
+  Ghoulish: 10000
+  # Demon
+  Fireball: 2000
+  Explosion: 8000
+  Snare: 1000
+  Summon-Strider: 2500
+  Hellish: 10000
+  # Priest
+  Banish: 4000
+  Exorcise: 9000
+  Drain: 1000
+  Heal-Human: 1000
+  Guardian-Angel: 5000
+  Cure: 5000
+  Holy-Book: 10000
+  # Necromancer
+  Summon-Skeleton: 1000
+  Summon-Undead: 5000
+  Heal-Undead: 3500
+  Ressurection-Spawn: 4000
+  Book-Of-Death: 10000
+  # Witch Hunter
+  Triple-Arrow: 300
+  Grapple-Arrow: 500
+  Fire-Arrow: 500
+  Power-Arrow: 1000
+  Volley-Arrow: 300
+  Book-Of-WitchHunter: 10000
+  # Angel
+  Holy-Smite: 1000
+  Taunt: 6000
+  Holy-Blessing: 3000
+  Wings: 5000

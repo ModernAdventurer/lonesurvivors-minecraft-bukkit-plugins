@@ -1,0 +1,1340 @@
+MergeFrequency: 30
+Messages:
+  prefix: '&f[&6Spawners&b++&f]'
+  reload-success: '&aConfig reloaded!'
+  insufficient-permission: '&4Error: &cInsufficient Permission'
+  unknown-entity: '&4Error: &cUnknown EntityType'
+  invalid-level: '&4Error: &cInvalid Level'
+  invalid-quantity: '&4Error: &cInvalid quantity'
+  invalid-price: '&4Error: &cInvalid price'
+  holding-spawner: '&4Error: &cMust be holding a Spawner'
+  no-console: 'Error: Console cannot use this command'
+  insufficient-balance: '&4Error: &cInsufficient funds'
+  incorrect-arg-count: '&4Error: &cIncorrect amount of args'
+Speed:
+  StartingPrice: 100
+  PriceMultiplier: 1.5
+  UpgradeCap: 5
+  DefaultSpeed: 20
+  TimerMultiplier: 0.9
+  MaxSpeedVariation: 0
+Quantity:
+  StartingPrice: 100
+  PriceMultiplier: 1.5
+  UpgradeCap: 5
+  Quantities:
+    1: '0-2'
+    2: '1-2'
+    3: '1-3'
+    4: '2-3'
+    5: '2-4'
+Drop:
+  Drops:
+    # Note: These drop changes only apply to spawner spawned mobs as they should
+    # dont add levels to make the entity drop nothing no matter the level
+    # Rarity will be effected by item rarity
+    # format: Item: 'dropCountRange:chanceToDrop:Rarity'
+    BAT: none
+    BEE: none
+    BLAZE: 
+      1:
+        Cost: 1000
+        XP: '10'
+        BLAZE_ROD: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '10'
+        BLAZE_ROD: '0-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '10'
+        BLAZE_ROD: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '10'
+        BLAZE_ROD: '1-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '10'
+        BLAZE_ROD: '2-3:100%:COMMON'
+    CAT:
+      1:
+        Cost: 1000
+        XP: '1-3'
+        STRING: '1-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        STRING: '1-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        STRING: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        STRING: '2-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        STRING: '2-4:100%:COMMON'
+    CAVE_SPIDER:
+      1:
+        Cost: -1
+        XP: '5'
+        STRING: '0-2:100%:COMMON'
+        SPIDER_EYE: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '5'
+        STRING: '1-2:100%:COMMON'
+        SPIDER_EYE: '0-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '5'
+        STRING: '1-3:100%:COMMON'
+        SPIDER_EYE: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '5'
+        STRING: '2-3:100%:COMMON'
+        SPIDER_EYE: '1-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '5'
+        STRING: '2-4:100%:COMMON'
+        SPIDER_EYE: '2-3:100%:COMMON'
+    CHICKEN:
+      1:
+        Cost: -1
+        XP: '1-3'
+        FEATHER: '0-2:100%:COMMON'
+        CHICKEN: '1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        FEATHER: '1-2:100%:COMMON'
+        CHICKEN: '1:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        FEATHER: '1-3:100%:COMMON'
+        CHICKEN: '1:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        FEATHER: '2-3:100%:COMMON'
+        CHICKEN: '2:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        FEATHER: '2-4:100%:COMMON'
+        CHICKEN: '2:100%:COMMON'
+    COD:
+      1:
+        Cost: -1
+        XP: '1-3'
+        COD: '1:100%:COMMON'
+        BONE_MEAL: '0-2:5%:RARE'
+      2:
+        Cost: 250
+        XP: '1-3'
+        COD: '1:100%:COMMON'
+        BONE_MEAL: '1-2:8%:RARE'
+      3:
+        Cost: 350
+        XP: '1-3'
+        COD: '1:100%:COMMON'
+        BONE_MEAL: '1-3:12%:RARE'
+      4:
+        Cost: 500
+        XP: '1-3'
+        COD: '2:100%:COMMON'
+        BONE_MEAL: '2-3:15%:RARE'
+      5:
+        Cost: 750
+        XP: '1-3'
+        COD: '2:100%:COMMON'
+        BONE_MEAL: '2-4:18%:RARE'
+    COW: 
+      1:
+        Cost: 1000
+        XP: '1-3'
+        LEATHER: '0-2:100%:COMMON'
+        BEEF: '1-3:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        LEATHER: '1-2:100%:COMMON'
+        BEEF: '2-3:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        LEATHER: '1-3:100%:COMMON'
+        BEEF: '2-4:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        LEATHER: '2-3:100%:COMMON'
+        BEEF: '3-4:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        LEATHER: '2-4:100%:COMMON'
+        BEEF: '3-5:100%:COMMON'
+    CREEPER: 
+      1:
+        Cost: 1000
+        XP: '5'
+        GUNPOWDER: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '5'
+        GUNPOWDER: '1-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '5'
+        GUNPOWDER: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '5'
+        GUNPOWDER: '2-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '5'
+        GUNPOWDER: '2-4:100%:COMMON'
+    DOLPHIN: 
+      1:
+        Cost: 1000
+        COD: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        COD: '0-2:100%:COMMON'
+      3:
+        Cost: 350
+        COD: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        COD: '1-3:100%:COMMON'
+      5:
+        Cost: 750
+        COD: '2-3:100%:COMMON'
+    DONKEY: 
+      1:
+        Cost: 1000
+        XP: '1-3'
+        LEATHER: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        LEATHER: '1-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        LEATHER: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        LEATHER: '2-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        LEATHER: '2-4:100%:COMMON'
+    DROWNED: 
+      1:
+        Cost: -1
+        XP: '5'
+        ROTTEN_FLESH: '0-2:100%:COMMON'
+        GOLD_INGOT: '1:5%:RARE'
+      2:
+        Cost: 250
+        XP: '5'
+        ROTTEN_FLESH: '1-2:100%:COMMON'
+        GOLD_INGOT: '1:6%:RARE'
+      3:
+        Cost: 350
+        XP: '5'
+        ROTTEN_FLESH: '1-3:100%:COMMON'
+        GOLD_INGOT: '1:7%:RARE'
+      4:
+        Cost: 500
+        XP: '5'
+        ROTTEN_FLESH: '2-3:100%:COMMON'
+        GOLD_INGOT: '1:8%:RARE'
+      5:
+        Cost: 750
+        XP: '5'
+        ROTTEN_FLESH: '2-4:100%:COMMON'
+        GOLD_INGOT: '1:9%:RARE'
+    ELDER_GUARDIAN:
+      1:
+        Cost: 1000
+        XP: '10'
+        PRISMARINE_SHARD: '0-2:100%:COMMON'
+        PRISMARINE_CRYSTALS: '0-2:33%:COMMON'
+        COD: '0-1:50%:COMMON'
+        WET_SPONGE: '1:100%:COMMON'
+        COD: '1:60%:RARE'
+        SALMON: '1:25%:RARE'
+        PUFFERFISH: '1:13%:RARE'
+        TROPICAL_FISH: '1:2%:RARE'
+      2:
+        Cost: 250
+        XP: '10'
+        PRISMARINE_SHARD: '1-2:100%:COMMON'
+        PRISMARINE_CRYSTALS: '1-2:33%:COMMON'
+        COD: '0-1:58%:COMMON'
+        WET_SPONGE: '1:100%:COMMON'
+        COD: '1:63%:RARE'
+        SALMON: '1:28%:RARE'
+        PUFFERFISH: '1:14%:RARE'
+        TROPICAL_FISH: '1:2%:RARE'
+      3:
+        Cost: 350
+        XP: '10'
+        PRISMARINE_SHARD: '1-3:100%:COMMON'
+        PRISMARINE_CRYSTALS: '1-2:50%:COMMON'
+        COD: '0-2:58%:COMMON'
+        WET_SPONGE: '1:100%:COMMON'
+        COD: '1:67%:RARE'
+        SALMON: '1:31%:RARE'
+        PUFFERFISH: '1:15%:RARE'
+        TROPICAL_FISH: '1:3%:RARE'
+      4:
+        Cost: 500
+        XP: '10'
+        PRISMARINE_SHARD: '2-3:100%:COMMON'
+        PRISMARINE_CRYSTALS: '1-3:50%:COMMON'
+        COD: '0-2:65%:COMMON'
+        WET_SPONGE: '1:100%:COMMON'
+        COD: '1:71%:RARE'
+        SALMON: '1:34%:RARE'
+        PUFFERFISH: '1:16%:RARE'
+        TROPICAL_FISH: '1:3%:RARE'
+      5:
+        Cost: 750
+        XP: '10'
+        PRISMARINE_SHARD: '2-4:100%:COMMON'
+        PRISMARINE_CRYSTALS: '2-3:50%:COMMON'
+        COD: '1-2:65%:COMMON'
+        WET_SPONGE: '1:100%:COMMON'
+        COD: '1:75%:RARE'
+        SALMON: '1:37%:RARE'
+        PUFFERFISH: '1:17%:RARE'
+        TROPICAL_FISH: '1:4%:RARE'
+    ENDER_DRAGON:
+      1:
+        Cost: -1
+        XP: '500'
+    ENDERMAN: 
+      1:
+        Cost: -1
+        XP: '5'
+        ENDER_PEARL: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '5'
+        ENDER_PEARL: '0-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '5'
+        ENDER_PEARL: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '5'
+        ENDER_PEARL: '1-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '5'
+        ENDER_PEARL: '2-3:100%:COMMON'
+    ENDERMITE:
+      1:
+        Cost: -1
+        XP: '5'
+    EVOKER: 
+      1:
+        Cost: 1000
+        XP: '10'
+        TOTEM_OF_UNDYING: '1:100%:COMMON'
+        EMERALD: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '10'
+        TOTEM_OF_UNDYING: '1:100%:COMMON'
+        EMERALD: '0-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '10'
+        TOTEM_OF_UNDYING: '1:100%:COMMON'
+        EMERALD: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '10'
+        TOTEM_OF_UNDYING: '1:100%:COMMON'
+        EMERALD: '1-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '10'
+        TOTEM_OF_UNDYING: '1:100%:COMMON'
+        EMERALD: '2-3:100%:COMMON'
+    FOX:
+      1:
+        Cost: -1
+        XP: '1-2'
+    GHAST: 
+      1:
+        Cost: 1000
+        XP: '5'
+        GHAST_TEAR: '0-1:100%:COMMON'
+        GUNPOWDER: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '5'
+        GHAST_TEAR: '0-2:100%:COMMON'
+        GUNPOWDER: '0-3:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '5'
+        GHAST_TEAR: '1-2:100%:COMMON'
+        GUNPOWDER: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '5'
+        GHAST_TEAR: '1-3:100%:COMMON'
+        GUNPOWDER: '2-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '5'
+        GHAST_TEAR: '2-3:100%:COMMON'
+        GUNPOWDER: '2-4:100%:COMMON'
+    GIANT: none
+    GUARDIAN: 
+      1:
+        Cost: -1
+        XP: '10'
+        PRISMARINE_SHARD: '0-2:100%:COMMON'
+        PRISMARINE_CRYSTALS: '0-2:33%:COMMON'
+        COD: '0-1:50%:COMMON'
+        COD: '1:60%:RARE'
+        SALMON: '1:25%:RARE'
+        PUFFERFISH: '1:13%:RARE'
+        TROPICAL_FISH: '1:2%:RARE'
+      2:
+        Cost: 250
+        XP: '10'
+        PRISMARINE_SHARD: '1-2:100%:COMMON'
+        PRISMARINE_CRYSTALS: '1-2:33%:COMMON'
+        COD: '0-1:58%:COMMON'
+        COD: '1:63%:RARE'
+        SALMON: '1:28%:RARE'
+        PUFFERFISH: '1:14%:RARE'
+        TROPICAL_FISH: '1:2.25%:RARE'
+      3:
+        Cost: 350
+        XP: '10'
+        PRISMARINE_SHARD: '1-3:100%:COMMON'
+        PRISMARINE_CRYSTALS: '1-2:50%:COMMON'
+        COD: '0-2:58%:COMMON'
+        COD: '1:67%:RARE'
+        SALMON: '1:31%:RARE'
+        PUFFERFISH: '1:15%:RARE'
+        TROPICAL_FISH: '1:2.5%:RARE'
+      4:
+        Cost: 500
+        XP: '10'
+        PRISMARINE_SHARD: '2-3:100%:COMMON'
+        PRISMARINE_CRYSTALS: '1-3:50%:COMMON'
+        COD: '0-2:65%:COMMON'
+        COD: '1:71%:RARE'
+        SALMON: '1:34%:RARE'
+        PUFFERFISH: '1:16%:RARE'
+        TROPICAL_FISH: '1:2.75%:RARE'
+      5:
+        Cost: 750
+        XP: '10'
+        PRISMARINE_SHARD: '2-4:100%:COMMON'
+        PRISMARINE_CRYSTALS: '2-3:50%:COMMON'
+        COD: '1-2:65%:COMMON'
+        COD: '1:75%:RARE'
+        SALMON: '1:37%:RARE'
+        PUFFERFISH: '1:17%:RARE'
+        TROPICAL_FISH: '1:3%:RARE'
+    ILLUSIONER:
+      1:
+        Cost: -1
+        XP: '5'
+    HORSE: 
+      1:
+        Cost: 1000
+        XP: '1-3'
+        LEATHER: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        LEATHER: '1-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        LEATHER: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        LEATHER: '2-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        LEATHER: '2-4:100%:COMMON'
+    HUSK:
+      1:
+        Cost: -1
+        XP: '5'
+        ROTTEN_FLESH: '0-2:100%:COMMON'
+        IRON_INGOT: '1:0.83%:RARE'
+        CARROT: '1:0.83%:RARE'
+        POTATO: '1:0.83%:RARE'
+      2:
+        Cost: 250
+        XP: '5'
+        ROTTEN_FLESH: '1-2:100%:COMMON'
+        IRON_INGOT: '1:1%:RARE'
+        CARROT: '1:1%:RARE'
+        POTATO: '1:1%:RARE'
+      3:
+        Cost: 350
+        XP: '5'
+        ROTTEN_FLESH: '1-3:100%:COMMON'
+        IRON_INGOT: '1:1.17%:RARE'
+        CARROT: '1:1.17%:RARE'
+        POTATO: '1:1.17%:RARE'
+      4:
+        Cost: 500
+        XP: '5'
+        ROTTEN_FLESH: '2-3:100%:COMMON'
+        IRON_INGOT: '1:1.34%:RARE'
+        CARROT: '1:1.34%:RARE'
+        POTATO: '1:1.34%:RARE'
+      5:
+        Cost: 750
+        XP: '5'
+        ROTTEN_FLESH: '2-4:100%:COMMON'
+        IRON_INGOT: '1:1.51%:RARE'
+        CARROT: '1:1.51%:RARE'
+        POTATO: '1:1.51%:RARE'
+    IRON_GOLEM: 
+      1:
+        Cost: -1
+        IRON_INGOT: '3-5:100%:COMMON'
+        POPPY: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        IRON_INGOT: '3-6:100%:COMMON'
+        POPPY: '0-3:100%:COMMON'
+      3:
+        Cost: 350
+        IRON_INGOT: '4-6:100%:COMMON'
+        POPPY: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        IRON_INGOT: '4-7:100%:COMMON'
+        POPPY: '1-4:100%:COMMON'
+      5:
+        Cost: 750
+        IRON_INGOT: '5-7:100%:COMMON'
+        POPPY: '2-4:100%:COMMON'
+    LLAMA:
+      1:
+        Cost: -1
+        XP: '1-3'
+        LEATHER: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        LEATHER: '1-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        LEATHER: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        LEATHER: '2-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        LEATHER: '2-4:100%:COMMON'
+    MAGMA_CUBE: 
+      1:
+        Cost: 1000
+        XP: '1-3'
+        MAGMA_CREAM: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        MAGMA_CREAM: '0-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        MAGMA_CREAM: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        MAGMA_CREAM: '1-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        MAGMA_CREAM: '2-3:100%:COMMON'
+    MULE:
+      1:
+        Cost: -1
+        XP: '1-3'
+        LEATHER: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        LEATHER: '1-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        LEATHER: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        LEATHER: '2-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        LEATHER: '2-4:100%:COMMON'
+    MUSHROOM_COW:
+      1:
+        Cost: -1
+        XP: '1-3'
+        LEATHER: '0-2:100%:COMMON'
+        BEEF: '1-3:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        LEATHER: '1-2:100%:COMMON'
+        BEEF: '2-3:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        LEATHER: '1-3:100%:COMMON'
+        BEEF: '2-4:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        LEATHER: '2-3:100%:COMMON'
+        BEEF: '3-4:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        LEATHER: '2-4:100%:COMMON'
+        BEEF: '3-5:100%:COMMON'
+    OCELOT:
+      1:
+        Cost: -1
+        XP: '1-3'
+    PANDA: 
+      1:
+        Cost: -1
+        XP: '1-3'
+        BAMBOO: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        BAMBOO: '0-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        BAMBOO: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        BAMBOO: '1-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        BAMBOO: '2-3:100%:COMMON'
+    PARROT: 
+      1:
+        Cost: 1000
+        XP: '1-3'
+        FEATHER: '1-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        FEATHER: '1-3:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        FEATHER: '2-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        FEATHER: '2-4:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        FEATHER: '3-4:100%:COMMON'
+    PHANTOM: 
+      1:
+        Cost: 1000
+        XP: '5'
+        PHANTOM_MEMBRANE: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '5'
+        PHANTOM_MEMBRANE: '0-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '5'
+        PHANTOM_MEMBRANE: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '5'
+        PHANTOM_MEMBRANE: '1-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '5'
+        PHANTOM_MEMBRANE: '2-3:100%:COMMON'
+    PIG: 
+      1:
+        Cost: 1000
+        XP: '1-3'
+        PORKCHOP: '1-3:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        PORKCHOP: '2-3:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        PORKCHOP: '2-4:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        PORKCHOP: '3-4:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        PORKCHOP: '3-5:100%:COMMON'
+    PIG_ZOMBIE: 
+      1:
+        Cost: 1000
+        XP: '5'
+        ROTTEN_FLESH: '0-1:100%:COMMON'
+        GOLDEN_NUGGET: '0-1:100%:COMMON'
+        GOLD_INGOT: '1:2.5%:RARE'
+      2:
+        Cost: 250
+        XP: '5'
+        ROTTEN_FLESH: '0-2:100%:COMMON'
+        GOLDEN_NUGGET: '0-2:100%:COMMON'
+        GOLD_INGOT: '1:2.75%:RARE'
+      3:
+        Cost: 350
+        XP: '5'
+        ROTTEN_FLESH: '1-2:100%:COMMON'
+        GOLDEN_NUGGET: '1-2:100%:COMMON'
+        GOLD_INGOT: '1:3%:RARE'
+      4:
+        Cost: 500
+        XP: '5'
+        ROTTEN_FLESH: '1-3:100%:COMMON'
+        GOLDEN_NUGGET: '1-3:100%:COMMON'
+        GOLD_INGOT: '1:3.25%:RARE'
+      5:
+        Cost: 750
+        XP: '5'
+        ROTTEN_FLESH: '2-3:100%:COMMON'
+        GOLDEN_NUGGET: '2-3:100%:COMMON'
+        GOLD_INGOT: '1:3.5%:RARE'
+    PILLAGER:
+      1:
+        Cost: -1
+        XP: '5'
+    POLAR_BEAR:
+      1:
+        Cost: 1000
+        XP: '1-3'
+        COD: '0-2:75%:COMMON'
+        SALMON: '0-2:25%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        COD: '1-2:77.5%:COMMON'
+        SALMON: '1-2:27.5%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        COD: '1-3:80%:COMMON'
+        SALMON: 1-3:30%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        COD: '2-3:82.5%:COMMON'
+        SALMON: '2-3:32.5%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        COD: '2-4:85%:COMMON'
+        SALMON: '2-4:35%:COMMON'
+    PUFFERFISH:
+      1:
+        Cost: -1
+        XP: '1-3'
+        PUFFERFISH: '1:100%:COMMON'
+        BONE_MEAL: '0-2:5%:RARE'
+      2:
+        Cost: 250
+        XP: '1-3'
+        PUFFERFISH: '1:100%:COMMON'
+        BONE_MEAL: '1-2:5.5%:RARE'
+      3:
+        Cost: 350
+        XP: '1-3'
+        PUFFERFISH: '1:100%:COMMON'
+        BONE_MEAL: '1-3:6%:RARE'
+      4:
+        Cost: 500
+        XP: '1-3'
+        PUFFERFISH: '1:100%:COMMON'
+        BONE_MEAL: '2-3:6.5%:RARE'
+      5:
+        Cost: 750
+        XP: '1-3'
+        PUFFERFISH: '1:100%:COMMON'
+        BONE_MEAL: '2-4:7%:RARE'
+    RABBIT:
+      1:
+        Cost: -1
+        XP: '1-3'
+        RABBIT: '0-1:100%:COMMON'
+        RABBIT_HIDE: '0-1:100%:COMMON'
+        RABBIT_FOOT: '1:10%:RARE'
+      2:
+        Cost: 250
+        XP: '1-3'
+        RABBIT: '0-2:100%:COMMON'
+        RABBIT_HIDE: '0-2:100%:COMMON'
+        RABBIT_FOOT: '1:12.5%:RARE'
+      3:
+        Cost: 350
+        XP: '1-3'
+        RABBIT: '1-2:100%:COMMON'
+        RABBIT_HIDE: '1-2:100%:COMMON'
+        RABBIT_FOOT: '1:15%:RARE'
+      4:
+        Cost: 500
+        XP: '1-3'
+        RABBIT: '1-3:100%:COMMON'
+        RABBIT_HIDE: '1-3:100%:COMMON'
+        RABBIT_FOOT: '1:17.5%:RARE'
+      5:
+        Cost: 750
+        XP: '1-3'
+        RABBIT: '2-3:100%:COMMON'
+        RABBIT_HIDE: '2-3:100%:COMMON'
+        RABBIT_FOOT: '1:20%:RARE'
+    RAVAGER:
+      1:
+        Cost: 1000
+        XP: '20'
+        SADDLE: '1:100%:COMMON'
+    SALMON:
+      1:
+        Cost: -1
+        XP: '1-3'
+        SALMON: '1:100%:COMMON'
+        BONE_MEAL: '0-2:5%:RARE'
+      2:
+        Cost: 250
+        XP: '1-3'
+        SALMON: '1-2:100%:COMMON'
+        BONE_MEAL: '1-2:6.25%:RARE'
+      3:
+        Cost: 350
+        XP: '1-3'
+        SALMON: '1-3:100%:COMMON'
+        BONE_MEAL: '1-3:7.5%:RARE'
+      4:
+        Cost: 500
+        XP: '1-3'
+        SALMON: '2-3:100%:COMMON'
+        BONE_MEAL: '2-3:8.75%:RARE'
+      5:
+        Cost: 750
+        XP: '1-3'
+        SALMON: '2-4:100%:COMMON'
+        BONE_MEAL: '2-4:10%:RARE'
+    SHEEP:
+      1:
+        Cost: -1
+        XP: '1-3'
+        WOOL: '1:100%:COMMON'
+        MUTTON: '1-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        WOOL: '1-2:100%:COMMON'
+        MUTTON: '1-3:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        WOOL: '1-3:100%:COMMON'
+        MUTTON: '2-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        WOOL: '2-3:100%:COMMON'
+        MUTTON: '2-4:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        WOOL: '2-4:100%:COMMON'
+        MUTTON: '3-4:100%:COMMON'
+    SHULKER: 
+      1:
+        Cost: 1000
+        XP: '5'
+        SHULKER_SHELL: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '5'
+        SHULKER_SHELL: '0-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '5'
+        SHULKER_SHELL: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '5'
+        SHULKER_SHELL: '1-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '5'
+        SHULKER_SHELL: '2-3:100%:COMMON'
+    SILVERFISH:
+      1:
+        Cost: -1
+        XP: '5'
+    SKELETON: 
+      1:
+        Cost: -1
+        XP: '5'
+        ARROW: '0-2:100%:COMMON'
+        BONE: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '5'
+        ARROW: '0-3:100%:COMMON'
+        BONE: '0-3:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '5'
+        ARROW: '1-3:100%:COMMON'
+        BONE: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '5'
+        ARROW: '1-4:100%:COMMON'
+        BONE: '1-4:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '5'
+        ARROW: '2-4:100%:COMMON'
+        BONE: '2-4:100%:COMMON'
+    SKELETON_HORSE:
+      1:
+        Cost: -1
+        XP: '1-3'
+        BONE: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        BONE: '0-3:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        BONE: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        BONE: '1-4:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        BONE: '2-4:100%:COMMON'
+    SLIME: 
+      1:
+        Cost: 1000
+        XP: '1-3'
+        SLIMEBALL: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        SLIMEBALL: '1-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        SLIMEBALL: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        SLIMEBALL: '2-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        SLIMEBALL: '2-4:100%:COMMON'
+    SNOWMAN: 
+      1:
+        Cost: 1000
+        SNOWBALL: '0-15:100%:COMMON'
+      2:
+        Cost: 250
+        SNOWBALL: '0-20:100%:COMMON'
+      3:
+        Cost: 350
+        SNOWBALL: '5-20:100%:COMMON'
+      4:
+        Cost: 500
+        SNOWBALL: '5-25:100%:COMMON'
+      5:
+        Cost: 750
+        SNOWBALL: '10-25:100%:COMMON'
+    SPIDER:
+      1:
+        Cost: -1
+        XP: '5'
+        STRING: '0-2:100%:COMMON'
+        SPIDER_EYE: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '5'
+        STRING: '1-2:100%:COMMON'
+        SPIDER_EYE: '1:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '5'
+        STRING: '1-3:100%:COMMON'
+        SPIDER_EYE: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '5'
+        STRING: '2-3:100%:COMMON'
+        SPIDER_EYE: '2:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '5'
+        STRING: '2-4:100%:COMMON'
+        SPIDER_EYE: '2-3:100%:COMMON'
+    SQUID: 
+      1:
+        Cost: -1
+        XP: '1-3'
+        INK_SAC: '1-3:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        INK_SAC: '2-3:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        INK_SAC: '2-4:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        INK_SAC: '3-4:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        INK_SAC: '3-5:100%:COMMON'
+    STRAY: 
+      1:
+        Cost: -1
+        XP: '5'
+        ARROW: '0-2:100%:COMMON'
+        BONE: '0-2:100%:COMMON'
+        TIPPED_ARROW: '0-1:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '5'
+        ARROW: '1-2:100%:COMMON'
+        BONE: '1-2:100%:COMMON'
+        TIPPED_ARROW: '0-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '5'
+        ARROW: '1-3:100%:COMMON'
+        BONE: '1-3:100%:COMMON'
+        TIPPED_ARROW: '1-2:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '5'
+        ARROW: '2-3:100%:COMMON'
+        BONE: '2-3:100%:COMMON'
+        TIPPED_ARROW: '1-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '5'
+        ARROW: '2-4:100%:COMMON'
+        BONE: '2-4:100%:COMMON'
+        TIPPED_ARROW: '2-3:100%:COMMON'
+    TRADER_LLAMA:
+      1:
+        Cost: 1000
+        XP: '1-3'
+        LEATHER: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        LEATHER: '1-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        LEATHER: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        LEATHER: '2-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        LEATHER: '2-4:100%:COMMON'
+    TROPICAL_FISH:
+      1:
+        Cost: -1
+        XP: '1-3'
+        TROPICAL_FISH: '1:100%:COMMON'
+        BONE_MEAL: '0-2:5%:RARE'
+      2:
+        Cost: 250
+        XP: '1-3'
+        TROPICAL_FISH: '1:100%:COMMON'
+        BONE_MEAL: '1-2:8%:RARE'
+      3:
+        Cost: 350
+        XP: '1-3'
+        TROPICAL_FISH: '1:100%:COMMON'
+        BONE_MEAL: '1-3:12%:RARE'
+      4:
+        Cost: 500
+        XP: '1-3'
+        TROPICAL_FISH: '2:100%:COMMON'
+        BONE_MEAL: '2-3:15%:RARE'
+      5:
+        Cost: 750
+        XP: '1-3'
+        TROPICAL_FISH: '2:100%:COMMON'
+        BONE_MEAL: '2-4:18%:RARE'
+    TURTLE:
+      1:
+        Cost: -1
+        XP: '1-3'
+        SEAGRASS: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        SEAGRASS: '0-3:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        SEAGRASS: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        SEAGRASS: '1-4:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        SEAGRASS: '2-4:100%:COMMON'
+    VEX: 
+      1:
+        Cost: 1000
+        XP: '5'
+    VILLAGER: none
+    WANDERING_TRADER: none
+    WITCH:
+      1:
+        Cost: -1
+        XP: '5'
+        GLASS_BOTTLE: '0-2:25%:COMMON'
+        GLOWSTONE_DUST: '0-2:25%:COMMON'
+        GUNPOWDER: '0-2:25%:COMMON'
+        REDSTONE: '0-2:25%:COMMON'
+        SPIDER_EYE: '0-2:25%:COMMON'
+        STICK: '0-2:50%:COMMON'
+        SUGAR: '0-2:25%:COMMON'
+      2:
+        Cost: 250
+        XP: '5'
+        GLASS_BOTTLE: '0-2:27.5%:COMMON'
+        GLOWSTONE_DUST: '0-2:27.5%:COMMON'
+        GUNPOWDER: '0-2:27.5%:COMMON'
+        REDSTONE: '0-2:27.5%:COMMON'
+        SPIDER_EYE: '0-2:27.5%:COMMON'
+        STICK: '0-2:55%:COMMON'
+        SUGAR: '0-2:27.5%:COMMON'
+      3:
+        Cost: 350
+        XP: '5'
+        GLASS_BOTTLE: '0-2:30%:COMMON'
+        GLOWSTONE_DUST: '0-2:30%:COMMON'
+        GUNPOWDER: '0-2:30%:COMMON'
+        REDSTONE: '0-2:30%:COMMON'
+        SPIDER_EYE: '0-2:30%:COMMON'
+        STICK: '0-2:60%:COMMON'
+        SUGAR: '0-2:30%:COMMON'
+      4:
+        Cost: 500
+        XP: '5'
+        GLASS_BOTTLE: '0-2:32.5%:COMMON'
+        GLOWSTONE_DUST: '0-2:32.5%:COMMON'
+        GUNPOWDER: '0-2:32.5%:COMMON'
+        REDSTONE: '0-2:32.5%:COMMON'
+        SPIDER_EYE: '0-2:32.5%:COMMON'
+        STICK: '0-2:65%:COMMON'
+        SUGAR: '0-2:32.5%:COMMON'
+      5:
+        Cost: 750
+        XP: '5'
+        GLASS_BOTTLE: '0-2:35%:COMMON'
+        GLOWSTONE_DUST: '0-2:35%:COMMON'
+        GUNPOWDER: '0-2:35%:COMMON'
+        REDSTONE: '0-2:35%:COMMON'
+        SPIDER_EYE: '0-2:35%:COMMON'
+        STICK: '0-2:70%:COMMON'
+        SUGAR: '0-2:35%:COMMON'
+    WITHER:
+      1:
+        Cost: -1
+        XP: '50'
+        NETHER_STAR: '1:100%:COMMON'
+    WITHER_SKELETON: 
+      1:
+        Cost: 1000
+        XP: '5'
+        COAL: '0-1:100%:COMMON'
+        BONE: '0-2:100%:COMMON'
+        WITHER_SKELETON_SKULL: '1:2.5%:RARE'
+      2:
+        Cost: 250
+        XP: '5'
+        COAL: '0-2:100%:COMMON'
+        BONE: '1-2:100%:COMMON'
+        WITHER_SKELETON_SKULL: '1:3%:RARE'
+      3:
+        Cost: 350
+        XP: '5'
+        COAL: '1-2:100%:COMMON'
+        BONE: '1-3:100%:COMMON'
+        WITHER_SKELETON_SKULL: '1:3.5%:RARE'
+      4:
+        Cost: 500
+        XP: '5'
+        COAL: '1-3:100%:COMMON'
+        BONE: '2-3:100%:COMMON'
+        WITHER_SKELETON_SKULL: '1:4%:RARE'
+      5:
+        Cost: 750
+        XP: '5'
+        COAL: '2-3:100%:COMMON'
+        BONE: '2-4:100%:COMMON'
+        WITHER_SKELETON_SKULL: '1:4.5%:RARE'
+    WOLF: 
+      1:
+        Cost: 1000
+        XP: '1-3'
+    ZOMBIE:
+      1:
+        Cost: -1
+        XP: '5'
+        ROTTEN_FLESH: '0-2:100%:COMMON'
+        IRON_INGOT: '1:0.83%:RARE'
+        CARROT: '1:0.83%:RARE'
+        POTATO: '1:0.83%:RARE'
+      2:
+        Cost: 250
+        XP: '5'
+        ROTTEN_FLESH: '1-2:100%:COMMON'
+        IRON_INGOT: '1:1%:RARE'
+        CARROT: '1:1%:RARE'
+        POTATO: '1:1%:RARE'
+      3:
+        Cost: 350
+        XP: '5'
+        ROTTEN_FLESH: '1-3:100%:COMMON'
+        IRON_INGOT: '1:1.17%:RARE'
+        CARROT: '1:1.17%:RARE'
+        POTATO: '1:1.17%:RARE'
+      4:
+        Cost: 500
+        XP: '5'
+        ROTTEN_FLESH: '2-3:100%:COMMON'
+        IRON_INGOT: '1:1.34%:RARE'
+        CARROT: '1:1.34%:RARE'
+        POTATO: '1:1.34%:RARE'
+      5:
+        Cost: 750
+        XP: '5'
+        ROTTEN_FLESH: '2-4:100%:COMMON'
+        IRON_INGOT: '1:1.51%:RARE'
+        CARROT: '1:1.51%:RARE'
+        POTATO: '1:1.51%:RARE'
+    ZOMBIE_HORSE:
+      1:
+        Cost: -1
+        XP: '1-3'
+        ROTTEN_FLESH: '0-2:100%:COMMON'
+      2:
+        Cost: 250
+        XP: '1-3'
+        ROTTEN_FLESH: '1-2:100%:COMMON'
+      3:
+        Cost: 350
+        XP: '1-3'
+        ROTTEN_FLESH: '1-3:100%:COMMON'
+      4:
+        Cost: 500
+        XP: '1-3'
+        ROTTEN_FLESH: '2-3:100%:COMMON'
+      5:
+        Cost: 750
+        XP: '1-3'
+        ROTTEN_FLESH: '2-4:100%:COMMON'
+    ZOMBIE_VILLAGER:
+      1:
+        Cost: 1000
+        XP: '5'
+        ROTTEN_FLESH: '0-2:100%:COMMON'
+        IRON_INGOT: '1:0.83%:RARE'
+        CARROT: '1:0.83%:RARE'
+        POTATO: '1:0.83%:RARE'
+      2:
+        Cost: 250
+        XP: '5'
+        ROTTEN_FLESH: '1-2:100%:COMMON'
+        IRON_INGOT: '1:1%:RARE'
+        CARROT: '1:1%:RARE'
+        POTATO: '1:1%:RARE'
+      3:
+        Cost: 350
+        XP: '5'
+        ROTTEN_FLESH: '1-3:100%:COMMON'
+        IRON_INGOT: '1:1.17%:RARE'
+        CARROT: '1:1.17%:RARE'
+        POTATO: '1:1.17%:RARE'
+      4:
+        Cost: 500
+        XP: '5'
+        ROTTEN_FLESH: '2-3:100%:COMMON'
+        IRON_INGOT: '1:1.34%:RARE'
+        CARROT: '1:1.34%:RARE'
+        POTATO: '1:1.34%:RARE'
+      5:
+        Cost: 750
+        XP: '5'
+        ROTTEN_FLESH: '2-4:100%:COMMON'
+        IRON_INGOT: '1:1.51%:RARE'
+        CARROT: '1:1.51%:RARE'
+        POTATO: '1:1.51%:RARE'

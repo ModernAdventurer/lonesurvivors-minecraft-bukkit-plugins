@@ -1,0 +1,14 @@
+main: me.LoneSurvivor.AredoCrates.AredoCrates
+name: AredoCrates
+version: 1
+author: LoneSurvivor
+api-version: 1.15
+depend: [dynmap]
+
+commands:
+  ac:
+    description: The AredoCrates command
+    usage: /<command>
+  aredocrates:
+    description: The AredoCrates command
+    usage: /<command>

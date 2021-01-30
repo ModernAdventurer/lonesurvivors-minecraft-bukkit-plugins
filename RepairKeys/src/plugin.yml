@@ -1,0 +1,16 @@
+main: me.LoneSurvivor.RepairKeys.RepairKeys
+name: RepairKeys
+version: 1.0.0
+author: LoneSurvivor
+api-version: 1.15
+
+commands:
+  rk:
+    description: The Main RepairKeys command
+    usage: /<command>
+  repairkeys:
+    description: The Main RepairKeys command
+    usage: /<command>
+  rkgui:
+    description: Opens the RepairKeys GUI if holding a key
+    usage: /<command>
