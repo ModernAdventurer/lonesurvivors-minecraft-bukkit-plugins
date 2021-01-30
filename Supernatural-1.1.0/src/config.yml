@@ -1,0 +1,366 @@
+StartingClass: 'Human'
+StartingMagic: 10000
+MagicCap: 10000
+# The amount of recruiting items a player can make (Moonflower Potion, etc) -1 removes the limit
+recruitingItemLimit: 1
+
+RunnableFrequency:
+  #Frequency is in ticks (1/20 of a second)
+  updateMagicDisplay: 5
+  NightVision: 5
+  Speed: 5
+  ejectIlligalArmour: 5
+  immovableSpells: 5
+  HostileAnimals: 20
+  GrappleArrowTeleport: 5
+
+FollowerSettings:
+  # the distance required for a follower to start walking towards you
+  ApproachLeaderDistance: 5
+  # the distance at which a follower will stop walking towards you
+  StayDistance: 3
+  # the distance required for a follower to teleport to you
+  TeleportDistance: 20
+
+DonationValue:
+  #Format: "Material: Value"
+  #You can find the list of material names here: "https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html"
+  HolyAlter:
+    COOKED_CHICKEN: 6
+    COOKED_COD: 5
+    COOKED_MUTTON: 6
+    COOKED_PORKCHOP: 8
+    COOKED_RABBIT: 5
+    COOKED_SALMON: 6
+    BEEF: 3
+    CHICKEN: 2
+    COD: 2
+    MUTTON: 2
+    PORKCHOP: 3
+    RABBIT: 3
+    SALMON: 2
+    ROTTEN_FLESH: 4
+    COOKED_BEEF: 8
+    TROPICAL_FISH: 1
+    APPLE: 4
+    BAKED_POTATO: 5
+    BEETROOT: 1
+    BEETROOT_SOUP: 6
+    BREAD: 5
+    CAKE: 14
+    CARROT: 3
+    CHORUS_FRUIT: 4
+    COOKIE: 2
+    DRIED_KELP: 1
+    ENCHANTED_GOLDEN_APPLE: 724
+    GOLDEN_APPLE: 84
+    GOLDEN_CARROT: 14
+    HONEY_BOTTLE: 6
+    MELON_SLICE: 2
+    MUSHROOM_STEW: 6
+    POTATO: 1
+    PUMPKIN_PIE: 8
+    RABBIT_STEW: 10
+    SWEET_BERRIES: 2
+    GOLD_NUGGET: 1
+    GOLD_INGOT: 10
+    GOLD_BLOCK: 90
+  UnholyAlter:
+    #MATERIAL: VALUE
+    BONE: 3
+    ROTTEN_FLESH: 2
+    MAGMA_CREAM: 5
+    PHANTOM_MEMBRANE: 10
+    ARROW: 2
+    ENDER_PEARL: 8
+    BLAZE_ROD: 5
+    STRING: 1
+    SPIDER_EYE: 3
+    GUNPOWDER: 3
+    GHAST_TEAR: 6
+    SLIME_BALL: 4
+    GOLD_NUGGET: 1
+    GOLD_INGOT: 10
+    GOLD_BLOCK: 90
+
+Messages:
+  prefix: '&f[&6Super&bnatural&f]'
+  # error messages
+  unknown-command: '&4Error: &cUnknown Command'
+  insufficient-permission: '&4Error: &cInsufficient Permission'
+  must-specify-player: '&4Error: &cNo Player Specified'
+  invalid-bounty: '&4Error: &cInvalid Bounty'
+  no-console: 'Error: Console cannot use this command'
+  insufficient-balance: '%prefix% &cInsufficient funds'
+  insufficient-magic: '%prefix% &cInsufficient Magic'
+  insufficient-hunger: '%prefix% &cInsufficient Hunger'
+  target-must-be-supernatural: '%prefix% &cTarget must be in a Supernatural type Class'
+  no-bounty-on-self: '%prefix% &cYou cant put a bounty on your self'
+  teleport-failure: '&4Error: &cNo teleport location set!'
+  # general messages
+  reload-success: '%prefix% &aConfig reloaded!'
+  only-supernaturals: '%prefix% &cYou can only %spellname% supernaturals'
+  unknown-race: '%prefix% &cUnknown race'
+  setrace-success: '%prefix% &aYou are now a %class%'
+  cured-first: '%prefix% &cYou must be cured before becoming a %class%'
+  already-class: '%prefix% &cYou are already a %class%'
+  cooldown: '%prefix% &cThis ability is on cooldown...'
+  # infection messages
+  supernatural-infection-infector: '%prefix% &aYou infected %victim% with the %class% disease'
+  supernatural-infection-infected: '%prefix% &aYou have been infected with the %class% disease'
+  # restriction messages
+  vampire-wooden-object: '%prefix% &cVampires cannot attack with Wooden Objects'
+  necromancer-netherite-object: '%prefix% &cNecromancers can only attack with Netherite Objects'
+  witchhunter-melee-object: '%prefix% &cWitch Hunters cannot attack with Melee Weapons'
+  vampire-no-eat: '%prefix% &cVampires cannot eat food'
+  night-only-abilities: '%prefix% &cYou cannot use abilities during the day'
+  recruiting-item-limit: '%prefix% &cYou have reached the limit for the amount of this type of recruiting item you can make!'
+  witchhunter-only-command: '%prefix% &cYou must be a Witch Hunter to use this command'
+  # follower messages
+  follower-follow: '%prefix% &6This follower is now following you'
+  follower-wait: '%prefix% &6This follower is now waiting for you'
+  # bounty messages
+  no-bounty: '%prefix% &cThis player doesnt have a bounty placed on them'
+  bounty-notify-sender: '%prefix% &6You put a bounty of %bounty%$ on %target% after the tax rate of %percenttax%% was subtracted from your total bounty")'
+  bounty-notify-target: '%prefix% &6%player% put a bounty of %bounty%$ on you.'
+  bounty-notify-all: '%prefix% &6%player% put a bounty of %bounty%$ on %target%'
+  bounty-get: '%prefix% &6%target% has a bounty of %bounty%$ on them'
+  redeem-bounty: '%prefix% &6You redeemed the %bounty%$ bounty placed on %target%'
+  # exorcise spell messages
+  exorcism-success-target: '%prefix% &aYou have been exorcised'
+  exorcism-success-sender: '%prefix% &aYou successfully exorcised %target%!'
+  # banish spell messages
+  banishment-success-target: '%prefix% &aYou have been banished'
+  banishment-success-sender: '%prefix% &aYou successfully banished %target%!'
+  no-banish-location: '%prefix% &cBanish Location not set!'
+  # teleport spell messages
+  set-teleport-location: '%prefix% &6Teleport Location Set'
+  teleport-success: '%prefix% &6Teleporting...'
+  # drain spell messages
+  target-no-magic: '%prefix% &cTarget has no magic'
+  # Heal Human Spell messages
+  full-health: '%prefix% &c%target% is already at full health'
+  heal-received: '%prefix% &6You were healed by %player%'
+  target-healed: '%prefix% &6Successfully healed %target%'
+  # Guardian Angel messages
+  guardian-angel-failed-sender: '%prefix% &c%target% already has the Guardian Angel effect applied'
+  guardian-angel-failed-target: '%prefix% &c%Player% tried to give you the Guardian Angel effect but you already have it'
+  guardian-angel-succeeded-sender: '%prefix% &6Guardian Angel effect applied to %target%'
+  guardian-angel-succeeded-target: '%prefix% &6%Player% gave your the Guardian Angel effect'
+  guardian-angel-use: '%prefix% &6The Guardian Angel Effect Saved You!'
+  # Ressurection Spawn messages
+  set-ressurection-location: '%prefix% &6Ressurection Location Set'
+  go-ressurection-location: '%prefix% &6Teleporting to Ressurection Location'
+  # alter messages
+  holy-donate-only: '%prefix% &6You must be a Holy Class to donate to church'
+  necromancer-donate-only: '%prefix% &6You must be a Necromancer to donate to church'
+  witchhunter-use-only: '%prefix% &6You must be a Witch Hunter to use this'
+  witchhunter-only-command: '%prefix% &6You must be a Witch Hunter to run this command'
+  
+PercentInfectionChances:
+  Death-By-Supernatural: 12.5
+  Death-By-Lava: 12.5
+  Death-In-Nether: 10
+  Death-By-Wolf: 10
+  Death-By-Bat: 10
+  Death-By-Monster: 10
+  Eating-Rotten-Flesh: 1
+  
+Prefixes:
+  Human: '&f[&aHuman&f]'
+  Vampire: '&f[&cVampire&f]'
+  Werewolf: '&f[&8Werewolf&f]'
+  Ghoul: '&f[&6Ghoul&f]'
+  Demon: '&f[&4Demon&f]'
+  Priest: '&f[&ePriest&f]'
+  Necromancer: '&f[&1Necromancer&f]'
+  WitchHunter: '&f[&5Witchhunter&f]'
+  Angel: '&f[&eAngel&f]'
+  Shade: '&f[&7Shade&f]'
+  Siren: '&f[&3Siren&f]'
+  EarthElemental: '&f[&2Earth Elemental&f]'
+  WaterElemental: '&f[&bWater Elemental&f]'
+  FireElemental: '&f[&6Fire Elemental&f]'
+ 
+Spells:
+  Vampire:
+    SetTeleportLocation:
+      Cost: 0
+      Cooldown: 0
+      TriggerMethod: 'left'
+    Teleport:
+      Cost: 9000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    HighJump:
+      Cost: 1000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    Bloodvial:
+      Cost: 500
+      Cooldown: 0
+      TriggerMethod: 'right'
+    ToggleRegeneration:
+      Cost: 0
+      Cooldown: 0
+      TriggerMethod: 'right'
+    Regeneration:
+      #Per Heart
+      Cost: 200
+    ToggleWaterBreathing:
+      Cost: 0
+      Cooldown: 0
+      TriggerMethod: 'right'
+    WaterBreathing:
+      # Per Tick (1/20 second)
+      Cost: 15
+    Bloodrose:
+      Cost: 10000
+      Cooldown: 0
+      TriggerMethod: 'right'
+  Werewolf:
+    SummonWolf:
+      Cost: 4000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    Dash:
+      Cost: 400
+      Cooldown: 0
+      TriggerMethod: 'right'
+    Moonflower:
+      Cost: 10000
+      Cooldown: 0
+      TriggerMethod: 'right'
+  Ghoul:
+    SummonMonster:
+      Cost: 1000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    UnholyBond:
+      Cost: 5000
+      Cooldown: 0
+      TriggerMethod: 'hit'
+    Ghoulish:
+      Cost: 10000
+      Cooldown: 0
+      TriggerMethod: 'right'
+  Demon:
+    Fireball:
+      Cost: 2000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    Explosion:
+      Cost: 8000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    Snare:
+      Cost: 1000
+      Cooldown: 0
+      TriggerMethod: 'hit'
+    SummonStrider:
+      Cost: 2500
+      Cooldown: 0
+      TriggerMethod: 'right'
+    Hellish:
+      Cost: 10000
+      Cooldown: 0
+      TriggerMethod: 'right'
+  Priest:
+    Banish:
+      Cost: 4000
+      Cooldown: 0
+      TriggerMethod: 'right'
+      Range: 20
+    Exorcise:
+      Cost: 9000
+      Cooldown: 0
+      TriggerMethod: 'right'
+      Range: 20
+    Drain:
+      Cost: 1000
+      Cooldown: 0
+      TriggerMethod: 'right'
+      Range: 20
+    HealHuman:
+      Cost: 1000
+      Cooldown: 0
+      TriggerMethod: 'hit'
+    GuardianAngel:
+      Cost: 5000
+      Cooldown: 0
+      TriggerMethod: 'hit'
+    Cure:
+      Cost: 5000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    HolyBook:
+      Cost: 10000
+      Cooldown: 0
+      TriggerMethod: 'right'
+  Necromancer:
+    SummonSkeleton:
+      Cost: 1000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    SummonUndead:
+      Cost: 5000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    HealUndead:
+      Cost: 3500
+      Cooldown: 0
+      TriggerMethod: 'right'
+    RessurectionSpawn:
+      Cost: 4000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    BookOfDeath:
+      Cost: 10000
+      Cooldown: 0
+      TriggerMethod: 'right'
+  WitchHunter:
+    ArrowSwitcher:
+      Cost: 0
+      Cooldown: 0
+      TriggerMethod: 'left'
+    TripleArrow:
+      Cost: 300
+      Cooldown: 0
+      TriggerMethod: 'shoot'
+    GrappleArrow:
+      Cost: 500
+      Cooldown: 0
+      TriggerMethod: 'shoot'
+    FireArrow:
+      Cost: 500
+      Cooldown: 0
+      TriggerMethod: 'shoot'
+    PowerArrow:
+      Cost: 500
+      Cooldown: 80
+      TriggerMethod: 'shoot'
+    VolleyArrow:
+      Cost: 300
+      Cooldown: 80
+      TriggerMethod: 'shoot'
+    BookOfWitchHunter:
+      Cost: 10000
+      Cooldown: 0
+      TriggerMethod: 'right'
+  Angel:
+    HolySmite:
+      Cost: 1000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    Taunt:
+      Cost: 6000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    HolyBlessing:
+      Cost: 3000
+      Cooldown: 0
+      TriggerMethod: 'right'
+    Wings:
+      Cost: 5000
+      Cooldown: 0
+      TriggerMethod: 'right'
