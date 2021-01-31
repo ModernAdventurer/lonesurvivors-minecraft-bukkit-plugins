@@ -14,14 +14,11 @@ public class BookOfWitchHunter {
 	    		return;
 	    	}
     	}
-    	supernatural.setCooldown(p.getUniqueId(), "BookOfWitchHunter", supernatural.getConfig().getInt("Spells.WitchHunter.BookOfWitchHunter.Cooldown"));
-    	supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.WitchHunter.BookOfWitchHunter.Cost"), false);
+		supernatural.setCooldown(p.getUniqueId(), "BookOfWitchHunter", supernatural.getConfig().getInt("Spells.WitchHunter.BookOfWitchHunter.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.WitchHunter.BookOfWitchHunter.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.WitchHunter.BookOfWitchHunter.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.WitchHunter.BookOfWitchHunter.Health-Cost"));
     	supernatural.setRecruitingItems(p, supernatural.getRace(p), (supernatural.getRecruitingItems(p, "BookOfWitchHunter") + 1));
     	supernatural.addItemSafely(p, constants.getCustomItems().get("BookOfWitchHunter"));
-		if(p.getHealth()>10) {
-			p.setHealth(p.getHealth()-10);
-		} else {
-			p.setHealth(0);
-		}
 	}
 }

@@ -22,7 +22,7 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -86,15 +86,15 @@ import me.LoneSurvivor.Supernatural.Classes.Priest.ActiveAbilities.*;
 import me.LoneSurvivor.Supernatural.Classes.Necromancer.ActiveAbilities.*;
 import me.LoneSurvivor.Supernatural.Classes.WitchHunter.ActiveAbilities.*;
 import me.LoneSurvivor.Supernatural.Classes.Angel.ActiveAbilities.*;
-import net.minecraft.server.v1_16_R1.ItemArmor;
-import net.minecraft.server.v1_16_R1.PacketPlayOutEntityDestroy;
+import net.minecraft.server.v1_16_R3.ItemArmor;
+import net.minecraft.server.v1_16_R3.PacketPlayOutEntityDestroy;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
-import net.minecraft.server.v1_16_R1.EntityInsentient;
+import net.minecraft.server.v1_16_R3.EntityInsentient;
 
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftArrow;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftArrow;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 
 public class Supernatural extends JavaPlugin implements Listener {
     private Economy eco;
@@ -243,7 +243,9 @@ public class Supernatural extends JavaPlugin implements Listener {
 	
 	private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
-        eco = rsp.getProvider();
+        if (rsp != null) {
+            eco = rsp.getProvider();
+        }
         return eco != null;
     }
  	
@@ -386,7 +388,7 @@ public class Supernatural extends JavaPlugin implements Listener {
 	}
 
 	public int getRecruitingItems(Player player, String race) {
-    	if (data.getConfig().getConfigurationSection("RecruitingItems." + player.getUniqueId().toString() + "." + race) != null) {
+    	if (data.getConfig().contains("RecruitingItems." + player.getUniqueId().toString() + "." + race)) {
     	    return data.getConfig().getInt("RecruitingItems." + player.getUniqueId().toString() + "." + race);
     	}
     	data.getConfig().set("RecruitingItems." + player.getUniqueId().toString() + "." + race, 0);
@@ -591,7 +593,7 @@ public class Supernatural extends JavaPlugin implements Listener {
 			if(EventItem.equals(constants.getSpellIcons().get("SummonSkeleton")) && this.triggerRequirements(p, action, "SummonSkeleton")) new SummonSkeleton(this, constants, p);
 			if(EventItem.equals(constants.getSpellIcons().get("SummonUndead")) && this.triggerRequirements(p, action, "SummonUndead")) new SummonUndead(this, constants, p);
 			if(EventItem.equals(constants.getSpellIcons().get("HealUndead")) && this.triggerRequirements(p, action, "HealUndead")) new HealUndead(this, constants, p);
-			if(EventItem.equals(constants.getSpellIcons().get("RessurectionSpawn")) && this.triggerRequirements(p, action, "RessurectionSpawn")) new SetRessurectionSpawn(this, constants, p);
+			if(EventItem.equals(constants.getSpellIcons().get("SetRessurectionSpawn")) && this.triggerRequirements(p, action, "SetRessurectionSpawn")) new SetRessurectionSpawn(this, constants, p);
 			if(EventItem.equals(constants.getSpellIcons().get("BookOfDeath")) && this.triggerRequirements(p, action, "BookOfDeath")) new BookOfDeath(this, constants, p);
 		}
 		if(race.equalsIgnoreCase("WitchHunter")) {
@@ -791,24 +793,28 @@ public class Supernatural extends JavaPlugin implements Listener {
 	}
 	
 	public Boolean triggerRequirements(Player p, String action, String spell) {
-		//Bukkit.broadcastMessage(spell + " triggered?");
 		if(action.equals(this.getConfig().getString("Spells." + getRace(p) + "." + spell + ".TriggerMethod"))) {
-			//Bukkit.broadcastMessage(spell + "correct action");
 			//If not on cooldown
 			if(!this.getCooldown(p.getUniqueId(), spell)) {
-				//Bukkit.broadcastMessage(spell + "no cooldown");
 				//If enough magika
-				if(getMagic(p) >= this.getConfig().getInt("Spells." + getRace(p) + "." + spell + ".Cost")) {
-					//Bukkit.broadcastMessage(spell + "sufficient magika");
-					return true;
+				if(getMagic(p) >= this.getConfig().getInt("Spells." + getRace(p) + "." + spell + ".Magic-Cost")) {
+					//If enough health
+					if(p.getHealth() > this.getConfig().getInt("Spells." + getRace(p) + "." + spell + ".Health-Cost")) {
+						//If enough food
+						if(p.getFoodLevel() >= this.getConfig().getInt("Spells." + getRace(p) + "." + spell + ".Food-Cost")) {
+							return true;
+						} else {
+							p.sendMessage(ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("Messages.insufficient-hunger").replaceAll("%prefix%", this.getConfig().getString("Messages.prefix"))));
+						}
+					} else {
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("Messages.insufficient-health").replaceAll("%prefix%", this.getConfig().getString("Messages.prefix"))));
+					}
 				} else {
 					p.sendMessage(ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("Messages.insufficient-magic").replaceAll("%prefix%", this.getConfig().getString("Messages.prefix"))));
 				}
 			} else {
 				p.sendMessage(ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("Messages.cooldown").replaceAll("%prefix%", this.getConfig().getString("Messages.prefix"))));
 			}
-		} else {
-			//Bukkit.broadcastMessage(action + " != " + this.getConfig().getString("Spells." + getRace(p) + "." + spell + ".TriggerMethod"));
 		}
 		return false;
 	}

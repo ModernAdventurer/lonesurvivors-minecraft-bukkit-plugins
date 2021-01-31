@@ -14,14 +14,11 @@ public class BookOfDeath {
 	    		return;
 	    	}
     	}
-    	supernatural.setCooldown(p.getUniqueId(), "BookOfDeath", supernatural.getConfig().getInt("Spells.Necromancer.BookOfDeath.Cooldown"));
-    	supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Necromancer.BookOfDeath.Cost"), false);
+		supernatural.setCooldown(p.getUniqueId(), "BookOfDeath", supernatural.getConfig().getInt("Spells.Necromancer.BookOfDeath.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Necromancer.BookOfDeath.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Necromancer.BookOfDeath.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Necromancer.BookOfDeath.Health-Cost"));
     	supernatural.setRecruitingItems(p, supernatural.getRace(p), (supernatural.getRecruitingItems(p, "BookOfDeath") + 1));
     	supernatural.addItemSafely(p, constants.getCustomItems().get("BookOfDeath"));
-		if(p.getHealth()>10) {
-			p.setHealth(p.getHealth()-10);
-		} else {
-			p.setHealth(0);
-		}
 	}
 }

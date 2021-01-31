@@ -11,7 +11,9 @@ import me.LoneSurvivor.Supernatural.repositories.Constants;
 public class PowerArrow {
 	public PowerArrow(Supernatural supernatural, Constants constants, Player p) {
 		supernatural.setCooldown(p.getUniqueId(), "PowerArrow", supernatural.getConfig().getInt("Spells.WitchHunter.PowerArrow.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.WitchHunter.PowerArrow.Cost"), false);
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.WitchHunter.PowerArrow.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.WitchHunter.PowerArrow.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.WitchHunter.PowerArrow.Health-Cost"));
 		Location loc = p.getLocation();
 		Vector playerDirection = loc.getDirection();
 		playerDirection.multiply(4);

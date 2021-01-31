@@ -11,7 +11,9 @@ import me.LoneSurvivor.Supernatural.repositories.Constants;
 public class TripleArrow {
 	public TripleArrow(Supernatural supernatural, Constants constants, Player p) {
 		supernatural.setCooldown(p.getUniqueId(), "TripleArrow", supernatural.getConfig().getInt("Spells.WitchHunter.TripleArrow.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.WitchHunter.TripleArrow.Cost"), false);
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.WitchHunter.TripleArrow.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.WitchHunter.TripleArrow.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.WitchHunter.TripleArrow.Health-Cost"));
 		Location loc = p.getLocation();
 		loc.setYaw(loc.getYaw() - 10F);
 		Vector playerDirection = loc.getDirection().multiply(1.5);

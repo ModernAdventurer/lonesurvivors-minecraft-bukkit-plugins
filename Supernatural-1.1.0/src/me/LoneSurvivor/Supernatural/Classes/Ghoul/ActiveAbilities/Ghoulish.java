@@ -14,14 +14,11 @@ public class Ghoulish {
 	    		return;
 	    	}
     	}
-    	supernatural.setCooldown(p.getUniqueId(), "Ghoulish", supernatural.getConfig().getInt("Spells.Ghoul.Ghoulish.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Ghoul.Ghoulish.Cost"), false);
+		supernatural.setCooldown(p.getUniqueId(), "Ghoulish", supernatural.getConfig().getInt("Spells.Ghoul.Ghoulish.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Ghoul.Ghoulish.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Ghoul.Ghoulish.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Ghoul.Ghoulish.Health-Cost"));
 		supernatural.setRecruitingItems(p, supernatural.getRace(p), (supernatural.getRecruitingItems(p, "Ghoulish") + 1));
 		supernatural.addItemSafely(p, constants.getCustomItems().get("Ghoulish"));
-		if(p.getHealth()>10) {
-			p.setHealth(p.getHealth()-10);
-		} else {
-			p.setHealth(0);
-		}
 	}
 }

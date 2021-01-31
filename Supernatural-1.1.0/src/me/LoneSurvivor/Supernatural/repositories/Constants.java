@@ -446,6 +446,99 @@ public class Constants {
 				CustomItems.put("BloodVial", item);
 	}
     
+    public String addSpaces(String sstr) {
+        String output = "";
+        char[] str=sstr.toCharArray(); 
+        // Traverse the string 
+        for (int i=0; i < str.length; i++) { 
+            if (str[i]>='&' && str[i]<='Z' && i != 0) {
+            	output += " ";
+            }
+            output += str[i];
+        }
+        return output;
+    }     
+    
+    private String ConstructLoreLine(String directoryName) {
+    	String line = "&e";
+		Boolean firstArgument = true;
+		int magicCost = supernatural.getConfig().getInt("Spells." + directoryName + ".Magic-Cost");
+		int foodCost = supernatural.getConfig().getInt("Spells." + directoryName + ".Food-Cost");
+		int healthCost = supernatural.getConfig().getInt("Spells." + directoryName + ".Health-Cost");
+    	if(supernatural.getConfig().getString("Spells." + directoryName + ".TriggerMethod").equals("right")) {
+    		line += "Right Click to use ";
+    	}
+    	if(supernatural.getConfig().getString("Spells." + directoryName + ".TriggerMethod").equals("left")) {
+    		line += "Left Click to use ";
+    	}
+    	if(supernatural.getConfig().getString("Spells." + directoryName + ".TriggerMethod").equals("hit")) {
+    		line += "Hit to use ";
+    	}
+    	if(supernatural.getConfig().getString("Spells." + directoryName + ".TriggerMethod").equals("shoot")) {
+    		line += "Shoot to use ";
+    	}
+    	line += ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString("Spells." + directoryName + ".SpellName")));
+		if(magicCost > 0) {
+			if(firstArgument) {
+				line += "&e - ";
+				firstArgument = false;
+			} else {
+				line += " & ";
+			}
+			line += magicCost + " Magika";
+		}
+		if(foodCost > 0) {
+			if(firstArgument) {
+				line += "&e - ";
+				firstArgument = false;
+			} else {
+				line += " & ";
+			}
+			line += foodCost + " Hunger";
+		}
+		if(healthCost > 0) {
+			if(firstArgument) {
+				line += "&e - ";
+				firstArgument = false;
+			} else {
+				line += " & ";
+			}
+			line += healthCost + " Health";
+		}
+		return line;
+    }
+    
+    public ItemStack createSpellIcon(String[] directoryNames) {
+    	try {
+    		ItemStack item = new ItemStack(Material.getMaterial(supernatural.getConfig().getString("Spells." + directoryNames[0] + ".IconMaterial")));
+        	ItemMeta meta = item.getItemMeta();
+        	List<String> lore = new ArrayList<String>();
+        	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+    		meta.setUnbreakable(true);
+        	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+    		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+    		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString("Spells." + directoryNames[0] + ".SpellName")));
+			lore.add(ChatColor.translateAlternateColorCodes('&', "&6----------------------"));
+    		for(String directoryName : directoryNames) {
+    			lore.add(ChatColor.translateAlternateColorCodes('&', ConstructLoreLine(directoryName)));
+    			if(!supernatural.getConfig().getString("Spells." + directoryName + ".Description").equals("")) {
+    				lore.add(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString("Spells." + directoryName + ".Description")));
+    			}
+    			lore.add(ChatColor.translateAlternateColorCodes('&', "&6----------------------"));
+    		}
+    		meta.setLore(lore);
+    		item.setItemMeta(meta);
+    		return item;
+    	} catch(Exception e) {
+    		ItemStack item = new ItemStack(Material.BARRIER);
+    		ItemMeta meta = item.getItemMeta();
+			meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4Error: &6" + directoryNames[0]));
+			item.setItemMeta(meta);
+			System.out.println("[Supernatural] Error: Failed to create the spell icon for this spell --> '" + directoryNames[0] + "'. Its icon replaced by a placeholder icon for the time being, please fix the problem and restart!");
+    		return item;
+    	}
+    }
+    
     public void SpellIcons() {
     	
 		ItemStack item = new ItemStack(Material.BOOK);
@@ -470,546 +563,88 @@ public class Constants {
 		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&cEmpty Slot"));
 		item.setItemMeta(meta);
 		SpellIcons.put("Empty", item);
+
+		SpellIcons.put("ToggleRegenerationEnabled", createSpellIcon(new String[] {"Vampire.ToggleRegenerationEnabled"}));
 		
-		item = new ItemStack(Material.PAPER);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Teleport"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Set Teleport Location"));
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Teleport - " + supernatural.getConfig().getInt("Spells.Vampire.Teleport.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Teleport", item);
+		SpellIcons.put("ToggleRegenerationDisabled", createSpellIcon(new String[] {"Vampire.ToggleRegenerationDisabled"}));
 		
-		item = new ItemStack(Material.FEATHER);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6High Jump"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to High Jump - " + supernatural.getConfig().getInt("Spells.Vampire.HighJump.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("HighJump", item);
+		SpellIcons.put("ToggleWaterBreathingEnabled", createSpellIcon(new String[] {"Vampire.ToggleWaterBreathingEnabled"}));
 		
-		item = new ItemStack(Material.FERMENTED_SPIDER_EYE);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Create Blood Vial"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Create a Blood Vial - " + supernatural.getConfig().getInt("Spells.Vampire.Bloodvial.Cost") + " Magika and 3 Hunger"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Bloodvial", item);
+		SpellIcons.put("ToggleWaterBreathingDisabled", createSpellIcon(new String[] {"Vampire.ToggleWaterBreathingDisabled"}));
+
+		SpellIcons.put("Teleport", createSpellIcon(new String[] {"Vampire.Teleport", "Vampire.SetTeleportLocation"}));
+
+		SpellIcons.put("HighJump", createSpellIcon(new String[] {"Vampire.HighJump"}));
+
+		SpellIcons.put("Bloodvial", createSpellIcon(new String[] {"Vampire.Bloodvial"}));
+
+		SpellIcons.put("Bloodrose", createSpellIcon(new String[] {"Vampire.Bloodrose"}));
+
+		SpellIcons.put("SummonWolf", createSpellIcon(new String[] {"Werewolf.SummonWolf"}));
 		
-		item = new ItemStack(Material.APPLE);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Regeneration - Enabled"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Toggle Regeneration - " + supernatural.getConfig().getInt("Spells.Vampire.Regeneration.Cost") + " Magika/Heart"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("ToggleRegenerationEnabled", item);
+		SpellIcons.put("Dash", createSpellIcon(new String[] {"Werewolf.Dash"}));
 		
-		item = new ItemStack(Material.APPLE);
-		meta = item.getItemMeta();
-		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Regeneration - Disabled"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Toggle Regeneration - " + supernatural.getConfig().getInt("Spells.Vampire.Regeneration.Cost") + " Magika/Heart"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("ToggleRegenerationDisabled", item);
+		SpellIcons.put("Moonflower", createSpellIcon(new String[] {"Werewolf.Moonflower"}));
 		
-		item = new ItemStack(Material.LILY_PAD);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Water Breathing - Enabled"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Toggle Water Breathing - " + supernatural.getConfig().getInt("Spells.Vampire.WaterBreathing.Cost")*20 + " Magika/Sec"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("ToggleWaterBreathingEnabled", item);
+		SpellIcons.put("SummonMonster", createSpellIcon(new String[] {"Ghoul.SummonMonster"}));
 		
-		item = new ItemStack(Material.LILY_PAD);
-		meta = item.getItemMeta();
-		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Water Breathing - Disabled"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Toggle Water Breathing - " + supernatural.getConfig().getInt("Spells.Vampire.WaterBreathing.Cost")*20 + " Magika/Sec"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("ToggleWaterBreathingDisabled", item);
+		SpellIcons.put("UnholyBond", createSpellIcon(new String[] {"Ghoul.UnholyBond"}));
 		
-		item = new ItemStack(Material.POPPY);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Create Bloodrose Potion"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Create Bloodrose Potion - " + supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Cost") + " Magika and 10 Health"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Bloodrose", item);
+		SpellIcons.put("Ghoulish", createSpellIcon(new String[] {"Ghoul.Ghoulish"}));
 		
-		item = new ItemStack(Material.BONE);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Summon Wolf"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Summon Wolf - " + supernatural.getConfig().getInt("Spells.Werewolf.SummonWolf.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("SummonWolf", item);
+		SpellIcons.put("Fireball", createSpellIcon(new String[] {"Demon.Fireball"}));
 		
-		item = new ItemStack(Material.FEATHER);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Dash"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Dash - " + supernatural.getConfig().getInt("Spells.Werewolf.Dash.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Dash", item);
+		SpellIcons.put("Explosion", createSpellIcon(new String[] {"Demon.Explosion"}));
 		
-		item = new ItemStack(Material.BLUE_ORCHID);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Create Moonflower Potion"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Create Moonflower Potion - " + supernatural.getConfig().getInt("Spells.Werewolf.Moonflower.Cost") + " Magika and 10 Health"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Moonflower", item);
+		SpellIcons.put("Snare", createSpellIcon(new String[] {"Demon.Snare"}));
 		
-		item = new ItemStack(Material.BONE_MEAL);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Summon Monster"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Summon a Monster - " + supernatural.getConfig().getInt("Spells.Ghoul.SummonUndead.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("SummonMonster", item);
-
-		item = new ItemStack(Material.BONE);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Unholy Bond"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eHit target to use Unhold Bond - " + supernatural.getConfig().getInt("Spells.Ghoul.UnholyBond.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("UnholyBond", item);
-
-		item = new ItemStack(Material.WITHER_ROSE);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Create Goulish Potion"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Create Goulish Potion - " + supernatural.getConfig().getInt("Spells.Ghoul.Ghoulish.Cost") + " Magika and 10 Health"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Ghoulish", item);
-
-		item = new ItemStack(Material.REDSTONE);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Fireball"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLaunches a fireball in the direction your looking - " + supernatural.getConfig().getInt("Spells.Demon.Fireball.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Fireball", item);
-
-		item = new ItemStack(Material.TNT);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Explosion"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eCauses an explosion where your standing - " + supernatural.getConfig().getInt("Spells.Demon.Explosion.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Explosion", item);
-
-		item = new ItemStack(Material.INK_SAC);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Snare"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eFreezes players you hit for 10s - " + supernatural.getConfig().getInt("Spells.Demon.Snare.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Snare", item);
+		SpellIcons.put("SummonStrider", createSpellIcon(new String[] {"Demon.SummonStrider"}));
 		
-		item = new ItemStack(Material.WARPED_FUNGUS_ON_A_STICK);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Summon Strider"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Summon a Strider - " + supernatural.getConfig().getInt("Spells.Demon.SummonStrider.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("SummonStrider", item);
-
-		item = new ItemStack(Material.NETHER_WART);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Create Hellish Potion"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Create Hellish Potion - " + supernatural.getConfig().getInt("Spells.Demon.Hellish.Cost") + " Magika and 10 Health"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Hellish", item);
-
-		item = new ItemStack(Material.IRON_BARS);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Banish Supernatural"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Banish Supernatural - " + supernatural.getConfig().getInt("Spells.Priest.Banish.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Banish", item);
-
-		item = new ItemStack(Material.FLINT_AND_STEEL);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Exorcise Supernatural"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Exorcise Supernatural - " + supernatural.getConfig().getInt("Spells.Priest.Exorcise.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Exorcise", item);
-
-		item = new ItemStack(Material.STICK);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Drain Supernatural"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Drain Supernatural - " + supernatural.getConfig().getInt("Spells.Priest.Drain.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Drain", item);
-
-		item = new ItemStack(Material.PAPER);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Heal Human"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Heal Human - " + supernatural.getConfig().getInt("Spells.Priest.HealHuman.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("HealHuman", item);
-
-		item = new ItemStack(Material.WHITE_WOOL);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Guardian Angel"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Guardian Angel - " + supernatural.getConfig().getInt("Spells.Priest.GuardianAngel.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("GuardianAngel", item);
-
-		item = new ItemStack(Material.BAMBOO);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Create Supernatural Cure"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Create Supernatural Cure - " + supernatural.getConfig().getInt("Spells.Priest.Cure.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Cure", item);
+		SpellIcons.put("Hellish", createSpellIcon(new String[] {"Demon.Hellish"}));
 		
-		item = new ItemStack(Material.BOOK);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Create Holy Book"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Create Holy Book - " + supernatural.getConfig().getInt("Spells.Priest.HolyBook.Cost") + " Magika and 10 Health"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("HolyBook", item);
+		SpellIcons.put("Banish", createSpellIcon(new String[] {"Priest.Banish"}));
 		
-		item = new ItemStack(Material.BONE);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Summon Skeleton"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Summon a Skeleton - " + supernatural.getConfig().getInt("Spells.Necromancer.SummonSkeleton.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("SummonSkeleton", item);
+		SpellIcons.put("Exorcise", createSpellIcon(new String[] {"Priest.Exorcise"}));
 		
-		item = new ItemStack(Material.ROTTEN_FLESH);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Summon Undead"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Summon an Undead Monster - " + supernatural.getConfig().getInt("Spells.Necromancer.SummonUndeadFollower.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("SummonUndead", item);
-
-		item = new ItemStack(Material.RED_DYE);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Heal Undead"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Heal Nearby Undead - " + supernatural.getConfig().getInt("Spells.Necromancer.HealUndead.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("HealUndead", item);
-
-		item = new ItemStack(Material.BONE_MEAL);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Ressurection Spawn"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to set next spawn point - " + supernatural.getConfig().getInt("Spells.Necromancer.RessurectionSpawn.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("RessurectionSpawn", item);
+		SpellIcons.put("Drain", createSpellIcon(new String[] {"Priest.Drain"}));
 		
-		item = new ItemStack(Material.BOOK);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Create Book Of Death"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Create Book Of Death - " + supernatural.getConfig().getInt("Spells.Necromancer.BookOfDeath.Cost") + " Magika and 10 Health"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("BookOfDeath", item);
-
-		item = new ItemStack(Material.BOW);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Bow - Triple Arrow"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Cycle through arrow types"));
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Shoot Triple Arrow - " + supernatural.getConfig().getInt("Spells.Witchhunter.TripleArrow.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("TripleArrow", item);
-
-		item = new ItemStack(Material.BOW);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Bow - Grapple Arrow"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Cycle through arrow types"));
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Shoot Grapple Arrow - " + supernatural.getConfig().getInt("Spells.Witchhunter.GrappleArrow.Cost") + " Magika"));
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&cJump to Cancel Grapple Arrow"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("GrappleArrow", item);
-
-		item = new ItemStack(Material.BOW);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Bow - Fire Arrow"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Cycle through arrow types"));
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Shoot Fire Arrow - " + supernatural.getConfig().getInt("Spells.Witchhunter.FireArrow.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("FireArrow", item);
-
-		item = new ItemStack(Material.BOW);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Bow - Power Arrow"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Cycle through arrow types"));
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Shoot Power Arrow - " + supernatural.getConfig().getInt("Spells.Witchhunter.PowerArrow.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("PowerArrow", item);
-
-		item = new ItemStack(Material.BOW);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Bow - Volley Arrow"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to Cycle through arrow types"));
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Shoot Volley Arrow - " + supernatural.getConfig().getInt("Spells.Witchhunter.VolleyArrow.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("VolleyArrow", item);
-
-		item = new ItemStack(Material.BOOK);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Create Book Of Witch Hunter"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eRight Click to Create Book Of Witch Hunter - " + supernatural.getConfig().getInt("Spells.Witchhunter.BookOfWitchHunter.Cost") + " Magika and 10 Health"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("BookOfWitchHunter", item);
-
-		item = new ItemStack(Material.BONE_MEAL);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Holy Smite"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click an enemy to use Holy Smite on them - " + supernatural.getConfig().getInt("Spells.Angel.HolySmite.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("HolySmite", item);
-
-		item = new ItemStack(Material.LEAD);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Taunt"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click someone to use Taunt on them - " + supernatural.getConfig().getInt("Spells.Angel.Taunt.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Taunt", item);
-
-		item = new ItemStack(Material.DANDELION);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Holy Blessing"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click someone to use Holy Blessing on them - " + supernatural.getConfig().getInt("Spells.Angel.HolyBlessing.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("HolyBlessing", item);
-
-		item = new ItemStack(Material.FEATHER);
-		meta = item.getItemMeta();
-    	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-    	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		meta.setUnbreakable(true);
-		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&6Wings"));
-		lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&eLeft Click to glide for the next 20s - " + supernatural.getConfig().getInt("Spells.Angel.Wings.Cost") + " Magika"));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		SpellIcons.put("Wings", item);
+		SpellIcons.put("HealHuman", createSpellIcon(new String[] {"Priest.HealHuman"}));
+		
+		SpellIcons.put("GuardianAngel", createSpellIcon(new String[] {"Priest.GuardianAngel"}));
+		
+		SpellIcons.put("Cure", createSpellIcon(new String[] {"Priest.Cure"}));
+		
+		SpellIcons.put("HolyBook", createSpellIcon(new String[] {"Priest.HolyBook"}));
+		
+		SpellIcons.put("SummonSkeleton", createSpellIcon(new String[] {"Necromancer.SummonSkeleton"}));
+		
+		SpellIcons.put("SummonUndead", createSpellIcon(new String[] {"Necromancer.SummonUndead"}));
+		
+		SpellIcons.put("HealUndead", createSpellIcon(new String[] {"Necromancer.HealUndead"}));
+		
+		SpellIcons.put("SetRessurectionSpawn", createSpellIcon(new String[] {"Necromancer.SetRessurectionSpawn"}));
+		
+		SpellIcons.put("BookOfDeath", createSpellIcon(new String[] {"Necromancer.BookOfDeath"}));
+		
+		SpellIcons.put("TripleArrow", createSpellIcon(new String[] {"WitchHunter.TripleArrow", "WitchHunter.ArrowSwitcher"}));
+		
+		SpellIcons.put("GrappleArrow", createSpellIcon(new String[] {"WitchHunter.GrappleArrow", "WitchHunter.ArrowSwitcher"}));
+		
+		SpellIcons.put("FireArrow", createSpellIcon(new String[] {"WitchHunter.FireArrow", "WitchHunter.ArrowSwitcher"}));
+		
+		SpellIcons.put("PowerArrow", createSpellIcon(new String[] {"WitchHunter.PowerArrow", "WitchHunter.ArrowSwitcher"}));
+		
+		SpellIcons.put("VolleyArrow", createSpellIcon(new String[] {"WitchHunter.VolleyArrow", "WitchHunter.ArrowSwitcher"}));
+		
+		SpellIcons.put("BookOfWitchHunter", createSpellIcon(new String[] {"WitchHunter.BookOfWitchHunter"}));
+		
+		SpellIcons.put("HolySmite", createSpellIcon(new String[] {"Angel.HolySmite"}));
+		
+		SpellIcons.put("Taunt", createSpellIcon(new String[] {"Angel.Taunt"}));
+		
+		SpellIcons.put("HolyBlessing", createSpellIcon(new String[] {"Angel.HolyBlessing"}));
+		
+		SpellIcons.put("Wings", createSpellIcon(new String[] {"Angel.Wings"}));
     }
     
 	public void DonationValueSetup() {

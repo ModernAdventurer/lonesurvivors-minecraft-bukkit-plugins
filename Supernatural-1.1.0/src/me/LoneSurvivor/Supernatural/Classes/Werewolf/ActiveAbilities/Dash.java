@@ -19,7 +19,9 @@ public class Dash {
 				return;
 			}
 			supernatural.setCooldown(p.getUniqueId(), "Dash", supernatural.getConfig().getInt("Spells.Werewolf.Dash.Cooldown"));
-			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Werewolf.Dash.Cost"), false);
+			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Werewolf.Dash.Magic-Cost"), false);
+			p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Werewolf.Dash.Food-Cost"));
+			p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Werewolf.Dash.Health-Cost"));
 			Vector direction = p.getLocation().getDirection().multiply(1.5).setY(p.getVelocity().getY());
 			p.setVelocity(direction);
 		} else {

@@ -12,7 +12,9 @@ import me.LoneSurvivor.Supernatural.repositories.Constants;
 public class SummonSkeleton {
 	public SummonSkeleton(Supernatural supernatural, Constants constants, Player p) {
 		supernatural.setCooldown(p.getUniqueId(), "SummonSkeleton", supernatural.getConfig().getInt("Spells.Necromancer.SummonSkeleton.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Necromancer.SummonSkeleton.Cost"), false);
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Necromancer.SummonSkeleton.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Necromancer.SummonSkeleton.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Necromancer.SummonSkeleton.Health-Cost"));
 		Skeleton skeleton = (Skeleton) p.getWorld().spawnEntity(p.getLocation(), EntityType.SKELETON);
 		skeleton.setCustomName(p.getName() + "'s Follower");
 		skeleton.setCustomNameVisible(true);

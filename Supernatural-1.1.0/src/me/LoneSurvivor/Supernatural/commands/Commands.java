@@ -23,7 +23,7 @@ public class Commands implements CommandExecutor {
     	if (commandLabel.equalsIgnoreCase("supernatural") || commandLabel.equalsIgnoreCase("sn")) {
             //Commands
             String subCommand = args[0];
-	        if (args.length > 0 || (subCommand.equalsIgnoreCase("help") || subCommand.equalsIgnoreCase("?"))) {
+	        if (args.length == 0 || (subCommand.equalsIgnoreCase("help") || subCommand.equalsIgnoreCase("?"))) {
 	           	new HelpCommand(supernatural, sender, args);
                	return true;
             }

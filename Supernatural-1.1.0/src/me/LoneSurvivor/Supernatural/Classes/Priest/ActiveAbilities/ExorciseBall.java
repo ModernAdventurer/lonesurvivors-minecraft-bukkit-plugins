@@ -9,7 +9,9 @@ import me.LoneSurvivor.Supernatural.repositories.Constants;
 public class ExorciseBall {
 	public ExorciseBall(Supernatural supernatural, Constants constants, Player p) {
 		supernatural.setCooldown(p.getUniqueId(), "Exorcise", supernatural.getConfig().getInt("Spells.Priest.Exorcise.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.Exorcise.Cost"), false);
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.Exorcise.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Priest.Exorcise.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Priest.Exorcise.Health-Cost"));
     	SmallFireball projectile = p.launchProjectile(SmallFireball.class);
     	projectile.setIsIncendiary(false);
     	projectile.setCustomName(p.getUniqueId().toString() + ":Exorcise");

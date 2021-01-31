@@ -15,7 +15,9 @@ public class HighJump {
 		l.setY(l.getY()-1.25);
 		if(l.getBlock().getType() != Material.AIR) {
 			supernatural.setCooldown(p.getUniqueId(), "HighJump", supernatural.getConfig().getInt("Spells.Vampire.HighJump.Cooldown"));
-			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Vampire.HighJump.Cost"), false);
+			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Vampire.HighJump.Magic-Cost"), false);
+			p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Vampire.HighJump.Food-Cost"));
+			p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Vampire.HighJump.Health-Cost"));
 			Vector vec = p.getVelocity();
 			p.setVelocity(vec.setY(vec.getY()+1));
 		}

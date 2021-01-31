@@ -12,7 +12,9 @@ public class SummonWolf {
 	public SummonWolf(Supernatural supernatural, Constants constants, Player p) {
 		if(!supernatural.isDay(p)) {
 			supernatural.setCooldown(p.getUniqueId(), "SummonWolf", supernatural.getConfig().getInt("Spells.Werewolf.SummonWolf.Cooldown"));
-			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Werewolf.SummonWolf.Cost"), false);
+			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Werewolf.SummonWolf.Magic-Cost"), false);
+			p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Werewolf.SummonWolf.Food-Cost"));
+			p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Werewolf.SummonWolf.Health-Cost"));
 			Wolf wolf = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
 			wolf.setOwner(p);
 		} else {

@@ -19,7 +19,9 @@ public class HealHuman {
 				return;
 			}
 			supernatural.setCooldown(p.getUniqueId(), "HealHuman", supernatural.getConfig().getInt("Spells.Priest.HealHuman.Cooldown"));
-			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.HealHuman.Cost"), false);
+			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.HealHuman.Magic-Cost"), false);
+			p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Priest.HealHuman.Food-Cost"));
+			p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Priest.HealHuman.Health-Cost"));
 			//Increase target health
 			int health = (int) (t.getHealth() + Math.round(Math.random()*5));
 			if(health > 20) {

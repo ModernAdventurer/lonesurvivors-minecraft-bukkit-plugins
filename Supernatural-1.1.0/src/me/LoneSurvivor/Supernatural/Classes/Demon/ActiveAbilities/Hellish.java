@@ -14,14 +14,11 @@ public class Hellish {
 	    		return;
 	    	}
     	}
-    	supernatural.setCooldown(p.getUniqueId(), "Hellish", supernatural.getConfig().getInt("Spells.Demon.Hellish.Cooldown"));
-    	supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Demon.Hellish.Cost"), false);
+		supernatural.setCooldown(p.getUniqueId(), "Hellish", supernatural.getConfig().getInt("Spells.Demon.Hellish.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Demon.Hellish.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Demon.Hellish.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Demon.Hellish.Health-Cost"));
     	supernatural.setRecruitingItems(p, supernatural.getRace(p), (supernatural.getRecruitingItems(p, "Hellish") + 1));
     	supernatural.addItemSafely(p, constants.getCustomItems().get("Hellish"));
-		if(p.getHealth()>10) {
-			p.setHealth(p.getHealth()-10);
-		} else {
-			p.setHealth(0);
-		}
 	}
 }

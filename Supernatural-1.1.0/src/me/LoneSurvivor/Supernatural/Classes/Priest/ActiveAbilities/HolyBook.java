@@ -14,14 +14,11 @@ public class HolyBook {
 	    		return;
 	    	}
     	}
-    	supernatural.setCooldown(p.getUniqueId(), "HolyBook", supernatural.getConfig().getInt("Spells.Priest.HolyBook.Cooldown"));
-    	supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.HolyBook.Cost"), false);
+		supernatural.setCooldown(p.getUniqueId(), "HolyBook", supernatural.getConfig().getInt("Spells.Priest.HolyBook.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.HolyBook.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Priest.HolyBook.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Priest.HolyBook.Health-Cost"));
     	supernatural.setRecruitingItems(p, supernatural.getRace(p), (supernatural.getRecruitingItems(p, "HolyBook") + 1));
     	supernatural.addItemSafely(p, constants.getCustomItems().get("HolyBook"));
-		if(p.getHealth()>10) {
-			p.setHealth(p.getHealth()-10);
-		} else {
-			p.setHealth(0);
-		}
 	}
 }

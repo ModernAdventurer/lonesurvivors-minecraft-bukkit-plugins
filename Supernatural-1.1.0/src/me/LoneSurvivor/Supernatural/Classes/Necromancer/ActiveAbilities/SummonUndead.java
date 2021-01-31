@@ -13,7 +13,9 @@ import me.LoneSurvivor.Supernatural.repositories.Constants;
 public class SummonUndead {
 	public SummonUndead(Supernatural supernatural, Constants constants, Player p) {
 		supernatural.setCooldown(p.getUniqueId(), "SummonUndead", supernatural.getConfig().getInt("Spells.Necromancer.SummonUndead.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Necromancer.SummonUndead.Cost"), false);
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Necromancer.SummonUndead.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Necromancer.SummonUndead.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Necromancer.SummonUndead.Health-Cost"));
 		Random rand = new Random();
 		int random = (int) Math.floor((rand.nextFloat()*constants.getUndead().size()));
 		Monster entity = (Monster) p.getWorld().spawnEntity(p.getLocation(), constants.getUndead().get(random));

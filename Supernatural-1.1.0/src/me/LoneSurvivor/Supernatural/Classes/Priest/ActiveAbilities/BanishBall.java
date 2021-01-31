@@ -14,7 +14,9 @@ public class BanishBall {
 			return;
 		}
 		supernatural.setCooldown(p.getUniqueId(), "Banish", supernatural.getConfig().getInt("Spells.Priest.Banish.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.Banish.Cost"), false);
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.Banish.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Priest.Banish.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Priest.Banish.Health-Cost"));
     	SmallFireball projectile = p.launchProjectile(SmallFireball.class);
     	projectile.setIsIncendiary(false);
     	projectile.setCustomName(p.getUniqueId().toString() + ":Banish");

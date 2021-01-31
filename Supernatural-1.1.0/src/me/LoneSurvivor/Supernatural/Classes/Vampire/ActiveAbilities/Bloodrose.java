@@ -14,14 +14,11 @@ public class Bloodrose {
 	    		return;
 	    	}
     	}
-    	supernatural.setCooldown(p.getUniqueId(), "Bloodrose", supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Cost"), false);
+		supernatural.setCooldown(p.getUniqueId(), "Bloodrose", supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Health-Cost"));
 		supernatural.setRecruitingItems(p, supernatural.getRace(p), (supernatural.getRecruitingItems(p, "Bloodrose") + 1));
 		supernatural.addItemSafely(p, constants.getCustomItems().get("Bloodrose"));
-		if(p.getHealth()>10) {
-			p.setHealth(p.getHealth()-10);
-		} else {
-			p.setHealth(0);
-		}
 	}
 }

@@ -93,6 +93,7 @@ Messages:
   no-console: 'Error: Console cannot use this command'
   insufficient-balance: '%prefix% &cInsufficient funds'
   insufficient-magic: '%prefix% &cInsufficient Magic'
+  insufficient-health: '%prefix% &cInsufficient Health'
   insufficient-hunger: '%prefix% &cInsufficient Hunger'
   target-must-be-supernatural: '%prefix% &cTarget must be in a Supernatural type Class'
   no-bounty-on-self: '%prefix% &cYou cant put a bounty on your self'
@@ -184,183 +185,406 @@ Prefixes:
  
 Spells:
   Vampire:
-    SetTeleportLocation:
-      Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'left'
     Teleport:
-      Cost: 9000
+      SpellName: '&eTeleport'
+      Description: ''
+      IconMaterial: 'PAPER'
+      Magic-Cost: 9000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
+    SetTeleportLocation:
+      SpellName: '&eSet Teleport Location'
+      Description: '&eSets the location you will teleport to when you teleport'
+      IconMaterial: 'PAPER'
+      Magic-Cost: 0
+      Food-Cost: 0
+      Health-Cost: 0
+      Cooldown: 0
+      TriggerMethod: 'left'
     HighJump:
-      Cost: 1000
+      SpellName: '&eHigh Jump'
+      Description: ''
+      IconMaterial: 'FEATHER'
+      Magic-Cost: 1000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     Bloodvial:
-      Cost: 500
+      SpellName: '&eBlood Vial'
+      Description: ''
+      IconMaterial: 'FERMENTED_SPIDER_EYE'
+      Magic-Cost: 500
+      Food-Cost: 3
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
-    ToggleRegeneration:
-      Cost: 0
+    ToggleRegenerationEnabled:
+      SpellName: '&eToggle Regeneration - Enabled'
+      Description: '&eConsumes 200 Magika / Heart'
+      IconMaterial: 'APPLE'
+      Magic-Cost: 0
+      Food-Cost: 0
+      Health-Cost: 0
+      Cooldown: 0
+      TriggerMethod: 'right'
+    ToggleRegenerationDisabled:
+      SpellName: '&eToggle Regeneration - Disabled'
+      Description: '&eConsumes 200 Magika / Heart'
+      IconMaterial: 'APPLE'
+      Magic-Cost: 0
+      Food-Cost: 0
+      Health-Cost: 0
+      Cooldown: 0
+      TriggerMethod: 'right'
+    ToggleWaterBreathingEnabled:
+      SpellName: '&eToggle Water Breathing - Enabled'
+      Description: 'Cost 300 Magika / Second'
+      IconMaterial: 'LILLYPAD'
+      Magic-Cost: 0
+      Food-Cost: 0
+      Health-Cost: 0
+      Cooldown: 0
+      TriggerMethod: 'right'
+    ToggleWaterBreathingDisabled:
+      SpellName: '&eToggle Water Breathing - Disabled'
+      Description: 'Cost 300 Magika / Second'
+      IconMaterial: 'LILLYPAD'
+      Magic-Cost: 0
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     Regeneration:
       #Per Heart
       Cost: 200
-    ToggleWaterBreathing:
-      Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
     WaterBreathing:
       # Per Tick (1/20 second)
       Cost: 15
     Bloodrose:
-      Cost: 10000
+      SpellName: '&eCreate Bloodrose Potion'
+      Description: ''
+      IconMaterial: 'POPPY'
+      Magic-Cost: 10000
+      Food-Cost: 0
+      Health-Cost: 10
       Cooldown: 0
       TriggerMethod: 'right'
   Werewolf:
     SummonWolf:
-      Cost: 4000
+      SpellName: '&eSummon Wolf'
+      Description: ''
+      IconMaterial: 'BONE'
+      Magic-Cost: 4000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     Dash:
-      Cost: 400
+      SpellName: '&eDash'
+      Description: ''
+      IconMaterial: 'FEATHER'
+      Magic-Cost: 400
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     Moonflower:
-      Cost: 10000
+      SpellName: '&eCreate Moonflower Potion'
+      Description: ''
+      IconMaterial: 'BLUE_ORCHID'
+      Magic-Cost: 10000
+      Food-Cost: 0
+      Health-Cost: 10
       Cooldown: 0
       TriggerMethod: 'right'
   Ghoul:
     SummonMonster:
-      Cost: 1000
+      SpellName: '&eSummon Monster'
+      Description: ''
+      IconMaterial: 'BONE_MEAL'
+      Magic-Cost: 1000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     UnholyBond:
-      Cost: 5000
+      SpellName: '&eUnholy Bond'
+      Description: ''
+      IconMaterial: 'BONE'
+      Magic-Cost: 5000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'hit'
     Ghoulish:
-      Cost: 10000
+      SpellName: '&eCreate Ghoulish Potion'
+      Description: ''
+      IconMaterial: 'WITHER_ROSE'
+      Magic-Cost: 10000
+      Food-Cost: 0
+      Health-Cost: 10
       Cooldown: 0
       TriggerMethod: 'right'
   Demon:
     Fireball:
-      Cost: 2000
+      SpellName: '&eFireball'
+      Description: '&eSummon a massive Fireball'
+      IconMaterial: 'REDSTONE'
+      Magic-Cost: 2000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     Explosion:
-      Cost: 8000
+      SpellName: '&eExplosion'
+      Description: ''
+      IconMaterial: 'TNT'
+      Magic-Cost: 8000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     Snare:
-      Cost: 1000
+      SpellName: '&eSnare'
+      Description: ''
+      IconMaterial: 'INK_SAC'
+      Magic-Cost: 1000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'hit'
     SummonStrider:
-      Cost: 2500
+      SpellName: '&6Summon Strider'
+      Description: ''
+      IconMaterial: 'WARPED_FUNGUS_ON_A_STICK'
+      Magic-Cost: 2500
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     Hellish:
-      Cost: 10000
+      SpellName: '&6Hellish'
+      Description: ''
+      IconMaterial: 'NETHER_WART'
+      Magic-Cost: 10000
+      Food-Cost: 0
+      Health-Cost: 10
       Cooldown: 0
       TriggerMethod: 'right'
   Priest:
     Banish:
-      Cost: 4000
+      SpellName: '&6Banish'
+      Description: ''
+      IconMaterial: 'IRON_BARS'
+      Magic-Cost: 4000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
       Range: 20
     Exorcise:
-      Cost: 9000
+      SpellName: '&6Exorcise'
+      Description: ''
+      IconMaterial: 'FLINT_AND_STEEL'
+      Magic-Cost: 9000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
       Range: 20
     Drain:
-      Cost: 1000
+      SpellName: '&6Drain'
+      Description: ''
+      IconMaterial: 'STICK'
+      Magic-Cost: 1000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
       Range: 20
     HealHuman:
-      Cost: 1000
+      SpellName: '&6Heal Human'
+      Description: ''
+      IconMaterial: 'PAPER'
+      Magic-Cost: 1000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'hit'
     GuardianAngel:
-      Cost: 5000
+      SpellName: '&6Guardian Angel'
+      Description: ''
+      IconMaterial: 'WHITE_WOOL'
+      Magic-Cost: 5000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'hit'
     Cure:
-      Cost: 5000
+      SpellName: '&6Cure'
+      Description: ''
+      IconMaterial: 'BAMBOO'
+      Magic-Cost: 5000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     HolyBook:
-      Cost: 10000
+      SpellName: '&6Holy Book'
+      Description: ''
+      IconMaterial: 'BOOK'
+      Magic-Cost: 10000
+      Food-Cost: 0
+      Health-Cost: 10
       Cooldown: 0
       TriggerMethod: 'right'
   Necromancer:
     SummonSkeleton:
-      Cost: 1000
+      SpellName: '&6Summon Skeleton'
+      Description: ''
+      IconMaterial: 'BONE'
+      Magic-Cost: 1000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     SummonUndead:
-      Cost: 5000
+      SpellName: '&6Summon Undead'
+      Description: ''
+      IconMaterial: 'ROTTEN_FLESH'
+      Magic-Cost: 5000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     HealUndead:
-      Cost: 3500
+      SpellName: '&6Heal Undead'
+      Description: ''
+      IconMaterial: 'RED_DYE'
+      Magic-Cost: 3500
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
-    RessurectionSpawn:
-      Cost: 4000
+    SetRessurectionSpawn:
+      SpellName: '&6Set Resurection Spawn'
+      Description: ''
+      IconMaterial: 'BONE_MEAL'
+      Magic-Cost: 4000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     BookOfDeath:
-      Cost: 10000
+      SpellName: '&6Book of Death'
+      Description: ''
+      IconMaterial: 'BOOK'
+      Magic-Cost: 10000
+      Food-Cost: 0
+      Health-Cost: 10
       Cooldown: 0
       TriggerMethod: 'right'
   WitchHunter:
     ArrowSwitcher:
-      Cost: 0
+      SpellName: '&6Arrow Switcher'
+      Description: '&eSwitches between arrow types'
+      IconMaterial: 'BOW'
+      Magic-Cost: 0
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'left'
     TripleArrow:
-      Cost: 300
+      SpellName: '&6Triple Arrow'
+      Description: '&eFires 3 arrows next to eachother'
+      IconMaterial: 'BOW'
+      Magic-Cost: 300
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'shoot'
     GrappleArrow:
-      Cost: 500
+      SpellName: '&6Grapple Arrow'
+      Description: '&ePulls you to wherever your arrow lands'
+      IconMaterial: 'BOW'
+      Magic-Cost: 500
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'shoot'
     FireArrow:
-      Cost: 500
+      SpellName: '&6Fire Arrow'
+      Description: '&eSets whatever you hit on fire'
+      IconMaterial: 'BOW'
+      Magic-Cost: 500
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'shoot'
     PowerArrow:
-      Cost: 500
+      SpellName: '&6Power Arrow'
+      Description: '&eCauses an explosion'
+      IconMaterial: 'BOW'
+      Magic-Cost: 500
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 80
       TriggerMethod: 'shoot'
     VolleyArrow:
-      Cost: 300
+      SpellName: '&6Volley Arrow'
+      Description: &eShoots multiple consecutive arrows''
+      IconMaterial: 'BOW'
+      Magic-Cost: 300
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 80
       TriggerMethod: 'shoot'
     BookOfWitchHunter:
-      Cost: 10000
+      SpellName: '&6Create Book of the Witch Hunter'
+      Description: ''
+      IconMaterial: 'BOOK'
+      Magic-Cost: 10000
+      Food-Cost: 0
+      Health-Cost: 10
       Cooldown: 0
       TriggerMethod: 'right'
   Angel:
     HolySmite:
-      Cost: 1000
+      SpellName: '&6Holy Smite'
+      Description: ''
+      IconMaterial: 'BONE_MEAL'
+      Magic-Cost: 1000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     Taunt:
-      Cost: 6000
+      SpellName: '&6Taunt'
+      Description: ''
+      IconMaterial: 'LEAD'
+      Magic-Cost: 6000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     HolyBlessing:
-      Cost: 3000
+      SpellName: '&6Holy Blessing'
+      Description: ''
+      IconMaterial: 'DANDELION'
+      Magic-Cost: 3000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
     Wings:
-      Cost: 5000
+      SpellName: '&6Wings'
+      Description: ''
+      IconMaterial: 'FEATHER'
+      Magic-Cost: 5000
+      Food-Cost: 0
+      Health-Cost: 0
       Cooldown: 0
       TriggerMethod: 'right'
