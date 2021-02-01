@@ -14,11 +14,11 @@ public class Moonflower {
 	    		return;
 	    	}
     	}
-		supernatural.setCooldown(p.getUniqueId(), "Moonflower", supernatural.getConfig().getInt("Spells.Werewolf.Moonflower.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Werewolf.Moonflower.Magic-Cost"), false);
-		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Werewolf.Moonflower.Food-Cost"));
-		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Werewolf.Moonflower.Health-Cost"));
-		supernatural.setRecruitingItems(p, supernatural.getRace(p), (supernatural.getRecruitingItems(p, "Moonflower") + 1));
+		supernatural.setCooldown(p.getUniqueId(), "Moonflower", supernatural.getConfig().getInt("Classes.Werewolf.ActiveAbilities.Moonflower.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Classes.Werewolf.ActiveAbilities.Moonflower.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Classes.Werewolf.ActiveAbilities.Moonflower.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Classes.Werewolf.ActiveAbilities.Moonflower.Health-Cost"));
+		supernatural.setRecruitingItems(p, "Moonflower", (supernatural.getRecruitingItems(p, "Moonflower") + 1));
 		supernatural.addItemSafely(p, constants.getCustomItems().get("Moonflower"));
 	}
 }

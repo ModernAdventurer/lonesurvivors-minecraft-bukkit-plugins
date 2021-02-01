@@ -18,10 +18,10 @@ public class HealHuman {
 				p.sendMessage(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString("Messages.full-health").replaceAll("%prefix%", supernatural.getConfig().getString("Messages.prefix")).replaceAll("%player%", p.getName()).replaceAll("%target%", t.getName())));
 				return;
 			}
-			supernatural.setCooldown(p.getUniqueId(), "HealHuman", supernatural.getConfig().getInt("Spells.Priest.HealHuman.Cooldown"));
-			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.HealHuman.Magic-Cost"), false);
-			p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Priest.HealHuman.Food-Cost"));
-			p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Priest.HealHuman.Health-Cost"));
+			supernatural.setCooldown(p.getUniqueId(), "HealHuman", supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.HealHuman.Cooldown"));
+			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.HealHuman.Magic-Cost"), false);
+			p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.HealHuman.Food-Cost"));
+			p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.HealHuman.Health-Cost"));
 			//Increase target health
 			int health = (int) (t.getHealth() + Math.round(Math.random()*5));
 			if(health > 20) {

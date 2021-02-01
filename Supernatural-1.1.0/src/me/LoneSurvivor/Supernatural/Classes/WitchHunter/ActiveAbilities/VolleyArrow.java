@@ -10,10 +10,10 @@ import me.LoneSurvivor.Supernatural.repositories.Constants;
 
 public class VolleyArrow {
 	public VolleyArrow(Supernatural supernatural, Constants constants, Player p) {
-		supernatural.setCooldown(p.getUniqueId(), "VolleyArrow", supernatural.getConfig().getInt("Spells.WitchHunter.VolleyArrow.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.WitchHunter.VolleyArrow.Magic-Cost"), false);
-		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.WitchHunter.VolleyArrow.Food-Cost"));
-		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.WitchHunter.VolleyArrow.Health-Cost"));
+		supernatural.setCooldown(p.getUniqueId(), "VolleyArrow", supernatural.getConfig().getInt("Classes.WitchHunter.ActiveAbilities.VolleyArrow.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Classes.WitchHunter.ActiveAbilities.VolleyArrow.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Classes.WitchHunter.ActiveAbilities.VolleyArrow.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Classes.WitchHunter.ActiveAbilities.VolleyArrow.Health-Cost"));
 		Location loc = p.getLocation();
 		loc.setYaw(loc.getYaw());
 		Vector playerDirection = loc.getDirection().multiply(2);

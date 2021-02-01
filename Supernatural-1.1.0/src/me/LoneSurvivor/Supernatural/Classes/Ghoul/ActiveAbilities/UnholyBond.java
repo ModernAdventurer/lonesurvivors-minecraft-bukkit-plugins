@@ -12,10 +12,10 @@ import me.LoneSurvivor.Supernatural.repositories.Constants;
 
 public class UnholyBond {
 	public UnholyBond(Supernatural supernatural, Constants constants, Player p, LivingEntity t) {
-		supernatural.setCooldown(p.getUniqueId(), "UnholyBond", supernatural.getConfig().getInt("Spells.Ghoul.UnholyBond.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Ghoul.UnholyBond.Magic-Cost"), false);
-		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Ghoul.UnholyBond.Food-Cost"));
-		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Ghoul.UnholyBond.Health-Cost"));
+		supernatural.setCooldown(p.getUniqueId(), "UnholyBond", supernatural.getConfig().getInt("Classes.Ghoul.ActiveAbilities.UnholyBond.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Classes.Ghoul.ActiveAbilities.UnholyBond.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Classes.Ghoul.ActiveAbilities.UnholyBond.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Classes.Ghoul.ActiveAbilities.UnholyBond.Health-Cost"));
 		Map<UUID, Map<UUID, Integer>> UnholyBond = supernatural.getUnholyBond();
 		Map<UUID, Integer> TaggedEntities = new HashMap<UUID, Integer>();
 		if(UnholyBond.containsKey(p.getUniqueId())) TaggedEntities = UnholyBond.get(p.getUniqueId());

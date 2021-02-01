@@ -459,25 +459,18 @@ public class Constants {
         return output;
     }     
     
-    private String ConstructLoreLine(String directoryName) {
-    	String line = "&e";
+    private String ConstructLoreLine(String directory) {
+    	String line = "";
 		Boolean firstArgument = true;
-		int magicCost = supernatural.getConfig().getInt("Spells." + directoryName + ".Magic-Cost");
-		int foodCost = supernatural.getConfig().getInt("Spells." + directoryName + ".Food-Cost");
-		int healthCost = supernatural.getConfig().getInt("Spells." + directoryName + ".Health-Cost");
-    	if(supernatural.getConfig().getString("Spells." + directoryName + ".TriggerMethod").equals("right")) {
-    		line += "Right Click to use ";
-    	}
-    	if(supernatural.getConfig().getString("Spells." + directoryName + ".TriggerMethod").equals("left")) {
-    		line += "Left Click to use ";
-    	}
-    	if(supernatural.getConfig().getString("Spells." + directoryName + ".TriggerMethod").equals("hit")) {
-    		line += "Hit to use ";
-    	}
-    	if(supernatural.getConfig().getString("Spells." + directoryName + ".TriggerMethod").equals("shoot")) {
-    		line += "Shoot to use ";
-    	}
-    	line += ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString("Spells." + directoryName + ".SpellName")));
+		int magicCost = supernatural.getConfig().getInt(directory + ".Magic-Cost");
+		int foodCost = supernatural.getConfig().getInt(directory + ".Food-Cost");
+		int healthCost = supernatural.getConfig().getInt(directory + ".Health-Cost");
+		String triggerMethod = supernatural.getConfig().getString(directory + ".TriggerMethod");
+    	if(triggerMethod.equals("right")) line += "&eRight Click to use ";
+    	if(triggerMethod.equals("left")) line += "&eLeft Click to use ";
+    	if(triggerMethod.equals("hit")) line += "&eHit to use ";
+    	if(triggerMethod.equals("shoot")) line += "&eShoot to use ";
+    	line += ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString(directory + ".SpellName")));
 		if(magicCost > 0) {
 			if(firstArgument) {
 				line += "&e - ";
@@ -508,21 +501,23 @@ public class Constants {
 		return line;
     }
     
-    public ItemStack createSpellIcon(String[] directoryNames) {
+    public ItemStack createSpellIcon(String[] spellInformation) {
     	try {
-    		ItemStack item = new ItemStack(Material.getMaterial(supernatural.getConfig().getString("Spells." + directoryNames[0] + ".IconMaterial")));
+    		String directory = "Classes." + spellInformation[0].split(":")[0] + ".ActiveAbilities." + spellInformation[0].split(":")[1];
+    		ItemStack item = new ItemStack(Material.getMaterial(directory + ".IconMaterial"));
         	ItemMeta meta = item.getItemMeta();
         	List<String> lore = new ArrayList<String>();
         	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
     		meta.setUnbreakable(true);
         	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
     		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-    		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString("Spells." + directoryNames[0] + ".SpellName")));
+    		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', directory + ".SpellName"));
 			lore.add(ChatColor.translateAlternateColorCodes('&', "&6----------------------"));
-    		for(String directoryName : directoryNames) {
-    			lore.add(ChatColor.translateAlternateColorCodes('&', ConstructLoreLine(directoryName)));
-    			if(!supernatural.getConfig().getString("Spells." + directoryName + ".Description").equals("")) {
-    				lore.add(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString("Spells." + directoryName + ".Description")));
+    		for(String spellInfo : spellInformation) {
+    			directory = "Classes." + spellInfo.split(":")[0] + ".ActiveAbilities." + spellInfo.split(":")[1];
+    			lore.add(ChatColor.translateAlternateColorCodes('&', ConstructLoreLine(directory)));
+    			if(!supernatural.getConfig().getString(directory + ".Description").equals("")) {
+    				lore.add(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString(directory + ".Description")));
     			}
     			lore.add(ChatColor.translateAlternateColorCodes('&', "&6----------------------"));
     		}
@@ -532,9 +527,9 @@ public class Constants {
     	} catch(Exception e) {
     		ItemStack item = new ItemStack(Material.BARRIER);
     		ItemMeta meta = item.getItemMeta();
-			meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4Error: &6" + directoryNames[0]));
+			meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4Error: &cFailed to create spellicon for " + spellInformation[0]));
 			item.setItemMeta(meta);
-			System.out.println("[Supernatural] Error: Failed to create the spell icon for this spell --> '" + directoryNames[0] + "'. Its icon replaced by a placeholder icon for the time being, please fix the problem and restart!");
+			System.out.println("[Supernatural] Error: Failed to create the spell icon for this spell --> '" + spellInformation[0] + "'. Its icon replaced by a placeholder icon for the time being, please fix the problem and restart!");
     		return item;
     	}
     }
@@ -564,87 +559,87 @@ public class Constants {
 		item.setItemMeta(meta);
 		SpellIcons.put("Empty", item);
 
-		SpellIcons.put("ToggleRegenerationEnabled", createSpellIcon(new String[] {"Vampire.ToggleRegenerationEnabled"}));
+		SpellIcons.put("ToggleRegenerationEnabled", createSpellIcon(new String[] {"Vampire:ToggleRegenerationEnabled"}));
 		
-		SpellIcons.put("ToggleRegenerationDisabled", createSpellIcon(new String[] {"Vampire.ToggleRegenerationDisabled"}));
+		SpellIcons.put("ToggleRegenerationDisabled", createSpellIcon(new String[] {"Vampire:ToggleRegenerationDisabled"}));
 		
-		SpellIcons.put("ToggleWaterBreathingEnabled", createSpellIcon(new String[] {"Vampire.ToggleWaterBreathingEnabled"}));
+		SpellIcons.put("ToggleWaterBreathingEnabled", createSpellIcon(new String[] {"Vampire:ToggleWaterBreathingEnabled"}));
 		
-		SpellIcons.put("ToggleWaterBreathingDisabled", createSpellIcon(new String[] {"Vampire.ToggleWaterBreathingDisabled"}));
+		SpellIcons.put("ToggleWaterBreathingDisabled", createSpellIcon(new String[] {"Vampire:ToggleWaterBreathingDisabled"}));
 
-		SpellIcons.put("Teleport", createSpellIcon(new String[] {"Vampire.Teleport", "Vampire.SetTeleportLocation"}));
+		SpellIcons.put("Teleport", createSpellIcon(new String[] {"Vampire:Teleport", "Vampire:SetTeleportLocation"}));
 
-		SpellIcons.put("HighJump", createSpellIcon(new String[] {"Vampire.HighJump"}));
+		SpellIcons.put("HighJump", createSpellIcon(new String[] {"Vampire:HighJump"}));
 
-		SpellIcons.put("Bloodvial", createSpellIcon(new String[] {"Vampire.Bloodvial"}));
+		SpellIcons.put("Bloodvial", createSpellIcon(new String[] {"Vampire:Bloodvial"}));
 
-		SpellIcons.put("Bloodrose", createSpellIcon(new String[] {"Vampire.Bloodrose"}));
+		SpellIcons.put("Bloodrose", createSpellIcon(new String[] {"Vampire:Bloodrose"}));
 
-		SpellIcons.put("SummonWolf", createSpellIcon(new String[] {"Werewolf.SummonWolf"}));
+		SpellIcons.put("SummonWolf", createSpellIcon(new String[] {"Werewolf:SummonWolf"}));
 		
-		SpellIcons.put("Dash", createSpellIcon(new String[] {"Werewolf.Dash"}));
+		SpellIcons.put("Dash", createSpellIcon(new String[] {"Werewolf:Dash"}));
 		
-		SpellIcons.put("Moonflower", createSpellIcon(new String[] {"Werewolf.Moonflower"}));
+		SpellIcons.put("Moonflower", createSpellIcon(new String[] {"Werewolf:Moonflower"}));
 		
-		SpellIcons.put("SummonMonster", createSpellIcon(new String[] {"Ghoul.SummonMonster"}));
+		SpellIcons.put("SummonMonster", createSpellIcon(new String[] {"Ghoul:SummonMonster"}));
 		
-		SpellIcons.put("UnholyBond", createSpellIcon(new String[] {"Ghoul.UnholyBond"}));
+		SpellIcons.put("UnholyBond", createSpellIcon(new String[] {"Ghoul:UnholyBond"}));
 		
-		SpellIcons.put("Ghoulish", createSpellIcon(new String[] {"Ghoul.Ghoulish"}));
+		SpellIcons.put("Ghoulish", createSpellIcon(new String[] {"Ghoul:Ghoulish"}));
 		
-		SpellIcons.put("Fireball", createSpellIcon(new String[] {"Demon.Fireball"}));
+		SpellIcons.put("Fireball", createSpellIcon(new String[] {"Demon:Fireball"}));
 		
-		SpellIcons.put("Explosion", createSpellIcon(new String[] {"Demon.Explosion"}));
+		SpellIcons.put("Explosion", createSpellIcon(new String[] {"Demon:Explosion"}));
 		
-		SpellIcons.put("Snare", createSpellIcon(new String[] {"Demon.Snare"}));
+		SpellIcons.put("Snare", createSpellIcon(new String[] {"Demon:Snare"}));
 		
-		SpellIcons.put("SummonStrider", createSpellIcon(new String[] {"Demon.SummonStrider"}));
+		SpellIcons.put("SummonStrider", createSpellIcon(new String[] {"Demon:SummonStrider"}));
 		
-		SpellIcons.put("Hellish", createSpellIcon(new String[] {"Demon.Hellish"}));
+		SpellIcons.put("Hellish", createSpellIcon(new String[] {"Demon:Hellish"}));
 		
-		SpellIcons.put("Banish", createSpellIcon(new String[] {"Priest.Banish"}));
+		SpellIcons.put("Banish", createSpellIcon(new String[] {"Priest:Banish"}));
 		
-		SpellIcons.put("Exorcise", createSpellIcon(new String[] {"Priest.Exorcise"}));
+		SpellIcons.put("Exorcise", createSpellIcon(new String[] {"Priest:Exorcise"}));
 		
-		SpellIcons.put("Drain", createSpellIcon(new String[] {"Priest.Drain"}));
+		SpellIcons.put("Drain", createSpellIcon(new String[] {"Priest:Drain"}));
 		
-		SpellIcons.put("HealHuman", createSpellIcon(new String[] {"Priest.HealHuman"}));
+		SpellIcons.put("HealHuman", createSpellIcon(new String[] {"Priest:HealHuman"}));
 		
-		SpellIcons.put("GuardianAngel", createSpellIcon(new String[] {"Priest.GuardianAngel"}));
+		SpellIcons.put("GuardianAngel", createSpellIcon(new String[] {"Priest:GuardianAngel"}));
 		
-		SpellIcons.put("Cure", createSpellIcon(new String[] {"Priest.Cure"}));
+		SpellIcons.put("Cure", createSpellIcon(new String[] {"Priest:Cure"}));
 		
-		SpellIcons.put("HolyBook", createSpellIcon(new String[] {"Priest.HolyBook"}));
+		SpellIcons.put("HolyBook", createSpellIcon(new String[] {"Priest:HolyBook"}));
 		
-		SpellIcons.put("SummonSkeleton", createSpellIcon(new String[] {"Necromancer.SummonSkeleton"}));
+		SpellIcons.put("SummonSkeleton", createSpellIcon(new String[] {"Necromancer:SummonSkeleton"}));
 		
-		SpellIcons.put("SummonUndead", createSpellIcon(new String[] {"Necromancer.SummonUndead"}));
+		SpellIcons.put("SummonUndead", createSpellIcon(new String[] {"Necromancer:SummonUndead"}));
 		
-		SpellIcons.put("HealUndead", createSpellIcon(new String[] {"Necromancer.HealUndead"}));
+		SpellIcons.put("HealUndead", createSpellIcon(new String[] {"Necromancer:HealUndead"}));
 		
-		SpellIcons.put("SetRessurectionSpawn", createSpellIcon(new String[] {"Necromancer.SetRessurectionSpawn"}));
+		SpellIcons.put("SetRessurectionSpawn", createSpellIcon(new String[] {"Necromancer:SetRessurectionSpawn"}));
 		
-		SpellIcons.put("BookOfDeath", createSpellIcon(new String[] {"Necromancer.BookOfDeath"}));
+		SpellIcons.put("BookOfDeath", createSpellIcon(new String[] {"Necromancer:BookOfDeath"}));
 		
-		SpellIcons.put("TripleArrow", createSpellIcon(new String[] {"WitchHunter.TripleArrow", "WitchHunter.ArrowSwitcher"}));
+		SpellIcons.put("TripleArrow", createSpellIcon(new String[] {"WitchHunter:TripleArrow", "WitchHunter:ArrowSwitcher"}));
 		
-		SpellIcons.put("GrappleArrow", createSpellIcon(new String[] {"WitchHunter.GrappleArrow", "WitchHunter.ArrowSwitcher"}));
+		SpellIcons.put("GrappleArrow", createSpellIcon(new String[] {"WitchHunter:GrappleArrow", "WitchHunter:ArrowSwitcher"}));
 		
-		SpellIcons.put("FireArrow", createSpellIcon(new String[] {"WitchHunter.FireArrow", "WitchHunter.ArrowSwitcher"}));
+		SpellIcons.put("FireArrow", createSpellIcon(new String[] {"WitchHunter:FireArrow", "WitchHunter:ArrowSwitcher"}));
 		
-		SpellIcons.put("PowerArrow", createSpellIcon(new String[] {"WitchHunter.PowerArrow", "WitchHunter.ArrowSwitcher"}));
+		SpellIcons.put("PowerArrow", createSpellIcon(new String[] {"WitchHunter:PowerArrow", "WitchHunter:ArrowSwitcher"}));
 		
-		SpellIcons.put("VolleyArrow", createSpellIcon(new String[] {"WitchHunter.VolleyArrow", "WitchHunter.ArrowSwitcher"}));
+		SpellIcons.put("VolleyArrow", createSpellIcon(new String[] {"WitchHunter:VolleyArrow", "WitchHunter:ArrowSwitcher"}));
 		
-		SpellIcons.put("BookOfWitchHunter", createSpellIcon(new String[] {"WitchHunter.BookOfWitchHunter"}));
+		SpellIcons.put("BookOfWitchHunter", createSpellIcon(new String[] {"WitchHunter:BookOfWitchHunter"}));
 		
-		SpellIcons.put("HolySmite", createSpellIcon(new String[] {"Angel.HolySmite"}));
+		SpellIcons.put("HolySmite", createSpellIcon(new String[] {"Angel:HolySmite"}));
 		
-		SpellIcons.put("Taunt", createSpellIcon(new String[] {"Angel.Taunt"}));
+		SpellIcons.put("Taunt", createSpellIcon(new String[] {"Angel:Taunt"}));
 		
-		SpellIcons.put("HolyBlessing", createSpellIcon(new String[] {"Angel.HolyBlessing"}));
+		SpellIcons.put("HolyBlessing", createSpellIcon(new String[] {"Angel:HolyBlessing"}));
 		
-		SpellIcons.put("Wings", createSpellIcon(new String[] {"Angel.Wings"}));
+		SpellIcons.put("Wings", createSpellIcon(new String[] {"Angel:Wings"}));
     }
     
 	public void DonationValueSetup() {

@@ -10,10 +10,10 @@ import me.LoneSurvivor.Supernatural.repositories.Constants;
 
 public class HealUndead {
 	public HealUndead(Supernatural supernatural, Constants constants, Player p) {
-		supernatural.setCooldown(p.getUniqueId(), "HealUndead", supernatural.getConfig().getInt("Spells.Necromancer.HealUndead.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Necromancer.HealUndead.Magic-Cost"), false);
-		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Necromancer.HealUndead.Food-Cost"));
-		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Necromancer.HealUndead.Health-Cost"));
+		supernatural.setCooldown(p.getUniqueId(), "HealUndead", supernatural.getConfig().getInt("Classes.Necromancer.ActiveAbilities.HealUndead.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Classes.Necromancer.ActiveAbilities.HealUndead.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Classes.Necromancer.ActiveAbilities.HealUndead.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Classes.Necromancer.ActiveAbilities.HealUndead.Health-Cost"));
 		for(Entity e : p.getNearbyEntities(10, 10, 10)) {
 			if(e instanceof LivingEntity) {
 				LivingEntity le = (LivingEntity) e;

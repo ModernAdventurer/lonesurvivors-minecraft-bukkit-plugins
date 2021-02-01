@@ -10,10 +10,10 @@ import me.LoneSurvivor.Supernatural.repositories.Constants;
 
 public class Snare {
 	public Snare(Supernatural supernatural, Constants constants, Player p, LivingEntity t) {
-		supernatural.setCooldown(p.getUniqueId(), "Snare", supernatural.getConfig().getInt("Spells.Demon.Snare.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Demon.Snare.Magic-Cost"), false);
-		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Demon.Snare.Food-Cost"));
-		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Demon.Snare.Health-Cost"));
+		supernatural.setCooldown(p.getUniqueId(), "Snare", supernatural.getConfig().getInt("Classes.Demon.ActiveAbilities.Snare.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Classes.Demon.ActiveAbilities.Snare.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Classes.Demon.ActiveAbilities.Snare.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Classes.Demon.ActiveAbilities.Snare.Health-Cost"));
 		t.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 200, 128));
 		t.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 6));
 	}

@@ -1,5 +1,6 @@
 package me.LoneSurvivor.Supernatural.Classes.Vampire.ActiveAbilities;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -14,11 +15,11 @@ public class Bloodrose {
 	    		return;
 	    	}
     	}
-		supernatural.setCooldown(p.getUniqueId(), "Bloodrose", supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Magic-Cost"), false);
-		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Food-Cost"));
-		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Vampire.Bloodrose.Health-Cost"));
-		supernatural.setRecruitingItems(p, supernatural.getRace(p), (supernatural.getRecruitingItems(p, "Bloodrose") + 1));
+		supernatural.setCooldown(p.getUniqueId(), "Bloodrose", supernatural.getConfig().getInt("Classes.Vampire.ActiveAbilities.Bloodrose.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Classes.Vampire.ActiveAbilities.Bloodrose.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Classes.Vampire.ActiveAbilities.Bloodrose.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Classes.Vampire.ActiveAbilities.Bloodrose.Health-Cost"));
+		supernatural.setRecruitingItems(p, "Bloodrose", (supernatural.getRecruitingItems(p, "Bloodrose") + 1));
 		supernatural.addItemSafely(p, constants.getCustomItems().get("Bloodrose"));
 	}
 }

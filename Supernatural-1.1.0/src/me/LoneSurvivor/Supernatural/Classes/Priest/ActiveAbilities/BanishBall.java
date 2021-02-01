@@ -13,10 +13,10 @@ public class BanishBall {
 			p.sendMessage(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString("Messages.no-banish-location").replaceAll("%prefix%", supernatural.getConfig().getString("Messages.prefix"))));
 			return;
 		}
-		supernatural.setCooldown(p.getUniqueId(), "Banish", supernatural.getConfig().getInt("Spells.Priest.Banish.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.Banish.Magic-Cost"), false);
-		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Priest.Banish.Food-Cost"));
-		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Priest.Banish.Health-Cost"));
+		supernatural.setCooldown(p.getUniqueId(), "Banish", supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.Banish.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.Banish.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.Banish.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.Banish.Health-Cost"));
     	SmallFireball projectile = p.launchProjectile(SmallFireball.class);
     	projectile.setIsIncendiary(false);
     	projectile.setCustomName(p.getUniqueId().toString() + ":Banish");
@@ -24,6 +24,6 @@ public class BanishBall {
             public void run() {
             	projectile.remove();
             }
-        }, ((long) Math.ceil(supernatural.FireballEstimateTimeFromDistance(supernatural.getConfig().getInt("Spells.Priest.Banish.Range"))*20)));
+        }, ((long) Math.ceil(supernatural.FireballEstimateTimeFromDistance(supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.Banish.Range"))*20)));
 	}
 }

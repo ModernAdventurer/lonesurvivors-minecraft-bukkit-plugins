@@ -8,10 +8,10 @@ import me.LoneSurvivor.Supernatural.repositories.Constants;
 
 public class DrainBall {
 	public DrainBall(Supernatural supernatural, Constants constants, Player p) {
-		supernatural.setCooldown(p.getUniqueId(), "Drain", supernatural.getConfig().getInt("Spells.Priest.Drain.Cooldown"));
-		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.Drain.Magic-Cost"), false);
-		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Priest.Drain.Food-Cost"));
-		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Priest.Drain.Health-Cost"));
+		supernatural.setCooldown(p.getUniqueId(), "Drain", supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.Drain.Cooldown"));
+		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.Drain.Magic-Cost"), false);
+		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.Drain.Food-Cost"));
+		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.Drain.Health-Cost"));
     	SmallFireball projectile = p.launchProjectile(SmallFireball.class);
     	projectile.setIsIncendiary(false);
     	projectile.setCustomName(p.getUniqueId().toString() + ":Drain");
@@ -19,6 +19,6 @@ public class DrainBall {
             public void run() {
             	projectile.remove();
             }
-        }, ((long) Math.ceil(supernatural.FireballEstimateTimeFromDistance(supernatural.getConfig().getInt("Spells.Priest.Drain.Range"))*20)));
+        }, ((long) Math.ceil(supernatural.FireballEstimateTimeFromDistance(supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.Drain.Range"))*20)));
 	}
 }

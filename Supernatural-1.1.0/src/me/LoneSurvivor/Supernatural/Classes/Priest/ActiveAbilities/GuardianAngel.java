@@ -24,10 +24,10 @@ public class GuardianAngel {
 				}
 			}
 
-			supernatural.setCooldown(p.getUniqueId(), "GuardianAngel", supernatural.getConfig().getInt("Spells.Priest.GuardianAngel.Cooldown"));
-			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Priest.GuardianAngel.Magic-Cost"), false);
-			p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Priest.GuardianAngel.Food-Cost"));
-			p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Priest.GuardianAngel.Health-Cost"));
+			supernatural.setCooldown(p.getUniqueId(), "GuardianAngel", supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.GuardianAngel.Cooldown"));
+			supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.GuardianAngel.Magic-Cost"), false);
+			p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.GuardianAngel.Food-Cost"));
+			p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Classes.Priest.ActiveAbilities.GuardianAngel.Health-Cost"));
 		
 			//add guardian angel
 			supernatural.addGuardianAngel(t);

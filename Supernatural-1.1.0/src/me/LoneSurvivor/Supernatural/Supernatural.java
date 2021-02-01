@@ -172,8 +172,8 @@ public class Supernatural extends JavaPlugin implements Listener {
             			if(tick % config.getInt("RunnableFrequency.GrappleArrowTeleport") == 0) GrappleArrowStage2(player);
         				//if(tick % config.getInt("RunnableFrequency.LavaSwimStartStop") == 0) lavaswimstartstop(player);
             			//tick frequency critical 
-            			if(tick % config.getInt("Spells.Vampire.Regeneration.Frequency") == 0) Regeneration(player);
-        				if(tick % config.getInt("Spells.Vampire.WaterBreathing.Frequency") == 0) WaterBreathing(player); 		
+            			if(tick % config.getInt("Classes.Vampire.PassiveAbilities.Regeneration.Frequency") == 0) Regeneration(player);
+        				if(tick % config.getInt("Classes.Vampire.PassiveAbilities.WaterBreathing.Frequency") == 0) WaterBreathing(player); 		
         				if(tick % 20 == 0) MagicFromHeat(player);
             			if(tick % 20 == 0) waterContact(player);
             			inSunlight(player, tick);       		
@@ -266,7 +266,7 @@ public class Supernatural extends JavaPlugin implements Listener {
 		String group = chat.getPrimaryGroup(player);
 		String prefix = chat.getGroupPrefix(world, group);
 		String race = getRace(player);
-		event.setFormat(ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("Prefixes." + race) + " " + prefix + player.getName() + "&8: &7" + event.getMessage()));
+		event.setFormat(ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("Classes." + race + ".Prefix") + " " + prefix + player.getName() + "&8: &7" + event.getMessage()));
     }
 	
 	public void updateMagicDisplay(Player player) {
@@ -400,13 +400,14 @@ public class Supernatural extends JavaPlugin implements Listener {
 	public int getRecruitingItems(Player player, String race) {
     	if (data.getConfig().contains("RecruitingItems." + player.getUniqueId().toString() + "." + race)) {
     	    return data.getConfig().getInt("RecruitingItems." + player.getUniqueId().toString() + "." + race);
+    	} else {
+        	data.getConfig().set("RecruitingItems." + player.getUniqueId().toString() + "." + race, 0);
+            data.saveConfig();
+            return getRecruitingItems(player, race);
     	}
-    	data.getConfig().set("RecruitingItems." + player.getUniqueId().toString() + "." + race, 0);
-        data.saveConfig();
-        return getRecruitingItems(player, race);
 	}
 	
-	public void setRecruitingItems(Player player, String race, Integer amount) {
+	public void setRecruitingItems(Player player, String race, int amount) {
     	data.getConfig().set("RecruitingItems." + player.getUniqueId().toString() + "." + race, amount);
     	data.saveConfig();
     	return;
@@ -805,15 +806,15 @@ public class Supernatural extends JavaPlugin implements Listener {
 	}
 	
 	public Boolean triggerRequirements(Player p, String action, String spell) {
-		if(action.equals(this.getConfig().getString("Spells." + getRace(p) + "." + spell + ".TriggerMethod"))) {
+		if(action.equals(this.getConfig().getString("Classes." + getRace(p) + ".ActiveAbility." + spell + ".TriggerMethod"))) {
 			//If not on cooldown
 			if(!this.getCooldown(p.getUniqueId(), spell)) {
 				//If enough magika
-				if(getMagic(p) >= this.getConfig().getInt("Spells." + getRace(p) + "." + spell + ".Magic-Cost")) {
+				if(getMagic(p) >= this.getConfig().getInt("Classes." + getRace(p) + ".ActiveAbility." + spell + ".Magic-Cost")) {
 					//If enough health
-					if(p.getHealth() > this.getConfig().getInt("Spells." + getRace(p) + "." + spell + ".Health-Cost")) {
+					if(p.getHealth() > this.getConfig().getInt("Classes." + getRace(p) + ".ActiveAbility." + spell + ".Health-Cost")) {
 						//If enough food
-						if(p.getFoodLevel() >= this.getConfig().getInt("Spells." + getRace(p) + "." + spell + ".Food-Cost")) {
+						if(p.getFoodLevel() >= this.getConfig().getInt("Classes." + getRace(p) + ".ActiveAbility." + spell + ".Food-Cost")) {
 							return true;
 						} else {
 							p.sendMessage(ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("Messages.insufficient-hunger").replaceAll("%prefix%", this.getConfig().getString("Messages.prefix"))));
@@ -2142,12 +2143,12 @@ public class Supernatural extends JavaPlugin implements Listener {
 			if(!Regeneration.containsKey(player)) Regeneration.put(player, false);
 			if(!Regeneration.get(player)) return;
 			if(player.getHealth() == 20 || player.getHealth() == 0) return;
-			if(getMagic(player) < this.getConfig().getInt("Spells.Vampire.Regeneration.Magic-Cost")) return;
-			if(player.getFoodLevel() < this.getConfig().getInt("Spells.Vampire.Regeneration.Food-Cost")) return;
-			if(player.getHealth() <= this.getConfig().getInt("Spells.Vampire.Regeneration.Health-Cost")) return;
-			setMagic(player, getMagic(player) - this.getConfig().getInt("Spells.Vampire.Regeneration.Magic-Cost"), false);
-			player.setFoodLevel(player.getFoodLevel() - this.getConfig().getInt("Spells.Vampire.Regeneration.Food-Cost"));
-			player.setHealth(player.getHealth() - this.getConfig().getInt("Spells.Vampire.Regeneration.Health-Cost"));
+			if(getMagic(player) < this.getConfig().getInt("Classes.Vampire.PassiveAbilities.Regeneration.Magic-Cost")) return;
+			if(player.getFoodLevel() < this.getConfig().getInt("Classes.Vampire.PassiveAbilities.Regeneration.Food-Cost")) return;
+			if(player.getHealth() <= this.getConfig().getInt("Classes.Vampire.PassiveAbilities.Regeneration.Health-Cost")) return;
+			setMagic(player, getMagic(player) - this.getConfig().getInt("Classes.Vampire.PassiveAbilities.Regeneration.Magic-Cost"), false);
+			player.setFoodLevel(player.getFoodLevel() - this.getConfig().getInt("Classes.Vampire.PassiveAbilities.Regeneration.Food-Cost"));
+			player.setHealth(player.getHealth() - this.getConfig().getInt("Classes.Vampire.PassiveAbilities.Regeneration.Health-Cost"));
 			
 			//Heal the player by half a heart
 			if(player.getHealth()+1<=20) {
@@ -2164,12 +2165,12 @@ public class Supernatural extends JavaPlugin implements Listener {
 			if(!WaterBreathing.containsKey(player)) WaterBreathing.put(player, false);
 			if(!WaterBreathing.get(player)) return;
 			if(player.getRemainingAir() == player.getMaximumAir()) return;
-			if(getMagic(player) < this.getConfig().getInt("Spells.Vampire.WaterBreathing.Magic-Cost")) return;
-			if(player.getFoodLevel() < this.getConfig().getInt("Spells.Vampire.WaterBreathing.Food-Cost")) return;
-			if(player.getHealth() <= this.getConfig().getInt("Spells.Vampire.WaterBreathing.Health-Cost")) return;
-			setMagic(player, getMagic(player) - this.getConfig().getInt("Spells.Vampire.WaterBreathing.Magic-Cost"), false);
-			player.setFoodLevel(player.getFoodLevel() - this.getConfig().getInt("Spells.Vampire.WaterBreathing.Food-Cost"));
-			player.setHealth(player.getHealth() - this.getConfig().getInt("Spells.Vampire.WaterBreathing.Health-Cost"));
+			if(getMagic(player) < this.getConfig().getInt("Classes.Vampire.PassiveAbilities.WaterBreathing.Magic-Cost")) return;
+			if(player.getFoodLevel() < this.getConfig().getInt("Classes.Vampire.PassiveAbilities.WaterBreathing.Food-Cost")) return;
+			if(player.getHealth() <= this.getConfig().getInt("Classes.Vampire.PassiveAbilities.WaterBreathing.Health-Cost")) return;
+			setMagic(player, getMagic(player) - this.getConfig().getInt("Classes.Vampire.PassiveAbilities.WaterBreathing.Magic-Cost"), false);
+			player.setFoodLevel(player.getFoodLevel() - this.getConfig().getInt("Classes.Vampire.PassiveAbilities.WaterBreathing.Food-Cost"));
+			player.setHealth(player.getHealth() - this.getConfig().getInt("Classes.Vampire.PassiveAbilities.WaterBreathing.Health-Cost"));
 			int air = player.getRemainingAir() + 30;
 			if(air > player.getMaximumAir()) air = player.getMaximumAir();
 			player.setRemainingAir(air);

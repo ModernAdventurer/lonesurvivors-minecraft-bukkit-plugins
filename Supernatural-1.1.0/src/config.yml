@@ -166,435 +166,467 @@ PercentInfectionChances:
   Death-By-Bat: 10
   Death-By-Monster: 10
   Eating-Rotten-Flesh: 1
-  
-Prefixes:
-  Human: '&f[&aHuman&f]'
-  Vampire: '&f[&cVampire&f]'
-  Werewolf: '&f[&8Werewolf&f]'
-  Ghoul: '&f[&6Ghoul&f]'
-  Demon: '&f[&4Demon&f]'
-  Priest: '&f[&ePriest&f]'
-  Necromancer: '&f[&1Necromancer&f]'
-  WitchHunter: '&f[&5Witchhunter&f]'
-  Angel: '&f[&eAngel&f]'
-  Shade: '&f[&7Shade&f]'
-  Siren: '&f[&3Siren&f]'
-  EarthElemental: '&f[&2Earth Elemental&f]'
-  WaterElemental: '&f[&bWater Elemental&f]'
-  FireElemental: '&f[&6Fire Elemental&f]'
- 
-Spells:
+
+Classes:
+  Human:
+    Prefix: '&f[&aHuman&f]'
+    ActiveAbilities:
+    PassiveAbilities:
   Vampire:
-    Teleport:
-      SpellName: '&eTeleport'
-      Description: '&eTeleports you to a set location'
-      IconMaterial: 'PAPER'
-      Magic-Cost: 9000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    SetTeleportLocation:
-      SpellName: '&eSet Teleport Location'
-      Description: '&eSets the location you will teleport to when using Teleport'
-      IconMaterial: 'PAPER'
-      Magic-Cost: 0
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'left'
-    HighJump:
-      SpellName: '&eHigh Jump'
-      Description: '&eLaunches you into the air'
-      IconMaterial: 'FEATHER'
-      Magic-Cost: 1000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    Bloodvial:
-      SpellName: '&eBlood Vial'
-      Description: '&eStores some of your hunger in a consumable potion'
-      IconMaterial: 'FERMENTED_SPIDER_EYE'
-      Magic-Cost: 500
-      Food-Cost: 3
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    ToggleRegenerationEnabled:
-      SpellName: '&eToggle Regeneration - Enabled'
-      Description: '&eConsumes 200 Magika / Heart'
-      IconMaterial: 'APPLE'
-      Magic-Cost: 0
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    ToggleRegenerationDisabled:
-      SpellName: '&eToggle Regeneration - Disabled'
-      Description: '&eConsumes 200 Magika / Heart'
-      IconMaterial: 'APPLE'
-      Magic-Cost: 0
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    ToggleWaterBreathingEnabled:
-      SpellName: '&eToggle Water Breathing - Enabled'
-      Description: '&eConsumes 30 Magika / Second'
-      IconMaterial: 'LILY_PAD'
-      Magic-Cost: 0
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    ToggleWaterBreathingDisabled:
-      SpellName: '&eToggle Water Breathing - Disabled'
-      Description: '&eConsumes 30 Magika / Second'
-      IconMaterial: 'LILY_PAD'
-      Magic-Cost: 0
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    Regeneration:
-      #Regenerates 1 Heart
-      #Cost Per Frequency
-      Magic-Cost: 200
-      Food-Cost: 0
-      Health-Cost: 0
-      #Frequency In Ticks
-      Frequency: 20
-    WaterBreathing:
-      #Regenerates 1 Heart
-      #Cost Per Frequency
-      Magic-Cost: 30
-      Food-Cost: 0
-      Health-Cost: 0
-      #Frequency In Ticks
-      Frequency: 20
-    Bloodrose:
-      SpellName: '&eCreate Bloodrose Potion'
-      Description: '&eCreates a concoction that when consumed turns the consumer into a Vampire'
-      IconMaterial: 'POPPY'
-      Magic-Cost: 10000
-      Food-Cost: 0
-      Health-Cost: 10
-      Cooldown: 0
-      TriggerMethod: 'right'
+    Prefix: '&f[&cVampire&f]'
+    ActiveAbilities:
+      Teleport:
+        SpellName: '&eTeleport'
+        Description: '&eTeleports you to a set location'
+        IconMaterial: 'PAPER'
+        Magic-Cost: 2600
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      SetTeleportLocation:
+        SpellName: '&eSet Teleport Location'
+        Description: '&eSets the location you will teleport to when using Teleport'
+        IconMaterial: 'PAPER'
+        Magic-Cost: 0
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'left'
+      HighJump:
+        SpellName: '&eHigh Jump'
+        Description: '&eLaunches you into the air'
+        IconMaterial: 'FEATHER'
+        Magic-Cost: 800
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      Bloodvial:
+        SpellName: '&eBlood Vial'
+        Description: '&eStores some of your hunger in a consumable potion'
+        IconMaterial: 'FERMENTED_SPIDER_EYE'
+        Magic-Cost: 700
+        Food-Cost: 3
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      ToggleRegenerationEnabled:
+        SpellName: '&eToggle Regeneration - Enabled'
+        Description: '&eConsumes 30 Magika / Heart'
+        IconMaterial: 'APPLE'
+        Magic-Cost: 0
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      ToggleRegenerationDisabled:
+        SpellName: '&eToggle Regeneration - Disabled'
+        Description: '&eConsumes 30 Magika / Heart'
+        IconMaterial: 'APPLE'
+        Magic-Cost: 0
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      ToggleWaterBreathingEnabled:
+        SpellName: '&eToggle Water Breathing - Enabled'
+        Description: '&eConsumes 80 Magika / Second'
+        IconMaterial: 'LILY_PAD'
+        Magic-Cost: 0
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      ToggleWaterBreathingDisabled:
+        SpellName: '&eToggle Water Breathing - Disabled'
+        Description: '&eConsumes 80 Magika / Second'
+        IconMaterial: 'LILY_PAD'
+        Magic-Cost: 0
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      Bloodrose:
+        SpellName: '&eCreate Bloodrose Potion'
+        Description: '&eCreates a concoction that when consumed turns the consumer into a Vampire'
+        IconMaterial: 'POPPY'
+        Magic-Cost: 10000
+        Food-Cost: 0
+        Health-Cost: 10
+        Cooldown: 0
+        TriggerMethod: 'right'
+    PassiveAbilities:
+      Regeneration:
+        #Regenerates 1 Heart
+        #Cost Per Frequency
+        Magic-Cost: 30
+        Food-Cost: 0
+        Health-Cost: 0
+        #Frequency In Ticks
+        Frequency: 20
+      WaterBreathing:
+        #Regenerates 1 Heart
+        #Cost Per Frequency
+        Magic-Cost: 80
+        Food-Cost: 0
+        Health-Cost: 0
+        #Frequency In Ticks
+        Frequency: 20
   Werewolf:
-    SummonWolf:
-      SpellName: '&eSummon Wolf'
-      Description: '&eSummons a Wolf Follower'
-      IconMaterial: 'BONE'
-      Magic-Cost: 4000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    Dash:
-      SpellName: '&eDash'
-      Description: '&eLaunches you forward'
-      IconMaterial: 'FEATHER'
-      Magic-Cost: 400
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    Moonflower:
-      SpellName: '&eCreate Moonflower Potion'
-      Description: '&eCreates a concoction that when consumed turns the consumer into a Werewolf'
-      IconMaterial: 'BLUE_ORCHID'
-      Magic-Cost: 10000
-      Food-Cost: 0
-      Health-Cost: 10
-      Cooldown: 0
-      TriggerMethod: 'right'
+    Prefix: '&f[&8Werewolf&f]'
+    ActiveAbilities:
+      SummonWolf:
+        SpellName: '&eSummon Wolf'
+        Description: '&eSummons a Wolf Follower'
+        IconMaterial: 'BONE'
+        Magic-Cost: 3000
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      Dash:
+        SpellName: '&eDash'
+        Description: '&eLaunches you forward'
+        IconMaterial: 'FEATHER'
+        Magic-Cost: 600
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      Moonflower:
+        SpellName: '&eCreate Moonflower Potion'
+        Description: '&eCreates a concoction that when consumed turns the consumer into a Werewolf'
+        IconMaterial: 'BLUE_ORCHID'
+        Magic-Cost: 10000
+        Food-Cost: 0
+        Health-Cost: 10
+        Cooldown: 0
+        TriggerMethod: 'right'
+    PassiveAbilities:
   Ghoul:
-    SummonMonster:
-      SpellName: '&eSummon Monster'
-      Description: '&eSummons a Random Monster'
-      IconMaterial: 'BONE_MEAL'
-      Magic-Cost: 1000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    UnholyBond:
-      SpellName: '&eUnholy Bond'
-      Description: '&eDeals damage to the target whenever they hit the caster for the next 2 1/2 Minuites'
-      IconMaterial: 'BONE'
-      Magic-Cost: 5000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'hit'
-    Ghoulish:
-      SpellName: '&eCreate Ghoulish Potion'
-      Description: '&eCreates a concoction that when consumed turns the consumer into a Ghoul'
-      IconMaterial: 'WITHER_ROSE'
-      Magic-Cost: 10000
-      Food-Cost: 0
-      Health-Cost: 10
-      Cooldown: 0
-      TriggerMethod: 'right'
+    Prefix: '&f[&6Ghoul&f]'
+    ActiveAbilities:
+      SummonMonster:
+        SpellName: '&eSummon Monster'
+        Description: '&eSummons a Random Monster'
+        IconMaterial: 'BONE_MEAL'
+        Magic-Cost: 1000
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      UnholyBond:
+        SpellName: '&eUnholy Bond'
+        Description: '&eDeals 1/4 damage to the target whenever they hit the caster for the next 2 1/2 Minuites'
+        IconMaterial: 'BONE'
+        Magic-Cost: 1000
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'hit'
+      Ghoulish:
+        SpellName: '&eCreate Ghoulish Potion'
+        Description: '&eCreates a concoction that when consumed turns the consumer into a Ghoul'
+        IconMaterial: 'WITHER_ROSE'
+        Magic-Cost: 10000
+        Food-Cost: 0
+        Health-Cost: 10
+        Cooldown: 0
+        TriggerMethod: 'right'
+    PassiveAbilities:
   Demon:
-    Fireball:
-      SpellName: '&eFireball'
-      Description: '&eLaunches a Fireball wherever the player is looking'
-      IconMaterial: 'REDSTONE'
-      Magic-Cost: 2000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    Explosion:
-      SpellName: '&eExplosion'
-      Description: '&eExplodes the area around the player'
-      IconMaterial: 'TNT'
-      Magic-Cost: 8000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    Snare:
-      SpellName: '&eSnare'
-      Description: '&ePrevents the target from moving for 10 seconds'
-      IconMaterial: 'INK_SAC'
-      Magic-Cost: 1000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'hit'
-    SummonStrider:
-      SpellName: '&eSummon Strider'
-      Description: '&eSpawns a Strider that the player can ride across lava lakes'
-      IconMaterial: 'WARPED_FUNGUS_ON_A_STICK'
-      Magic-Cost: 2500
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    Hellish:
-      SpellName: '&eHellish'
-      Description: '&eCreates a concoction that when consumed turns the consumer into a Demon'
-      IconMaterial: 'NETHER_WART'
-      Magic-Cost: 10000
-      Food-Cost: 0
-      Health-Cost: 10
-      Cooldown: 0
-      TriggerMethod: 'right'
+    Prefix: '&f[&4Demon&f]'
+    ActiveAbilities:
+      Fireball:
+        SpellName: '&eFireball'
+        Description: '&eLaunches a Fireball wherever the player is looking'
+        IconMaterial: 'REDSTONE'
+        Magic-Cost: 700
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      Explosion:
+        SpellName: '&eExplosion'
+        Description: '&eExplodes the area around the player'
+        IconMaterial: 'TNT'
+        Magic-Cost: 3500
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      SummonStrider:
+        SpellName: '&eSummon Strider'
+        Description: '&eSpawns a Strider that the player can ride across lava lakes'
+        IconMaterial: 'WARPED_FUNGUS_ON_A_STICK'
+        Magic-Cost: 2500
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      Snare:
+        SpellName: '&eSnare'
+        Description: '&ePrevents the target from moving for 10 seconds'
+        IconMaterial: 'INK_SAC'
+        Magic-Cost: 5500
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'hit'
+      Hellish:
+        SpellName: '&eHellish'
+        Description: '&eCreates a concoction that when consumed turns the consumer into a Demon'
+        IconMaterial: 'NETHER_WART'
+        Magic-Cost: 10000
+        Food-Cost: 0
+        Health-Cost: 10
+        Cooldown: 0
+        TriggerMethod: 'right'
+    PassiveAbilities:
   Priest:
-    Banish:
-      SpellName: '&eBanish'
-      Description: '&eSends the target to the banish location'
-      IconMaterial: 'IRON_BARS'
-      Magic-Cost: 4000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-      Range: 20
-    Exorcise:
-      SpellName: '&eExorcise'
-      Description: '&eTurns the target back into a human'
-      IconMaterial: 'FLINT_AND_STEEL'
-      Magic-Cost: 9000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-      Range: 20
-    Drain:
-      SpellName: '&eDrain'
-      Description: '&eDrains 15% of the targets magic'
-      IconMaterial: 'STICK'
-      Magic-Cost: 1000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-      Range: 20
-    HealHuman:
-      SpellName: '&eHeal Human'
-      Description: '&eIncreases the targets health by 0-5 hearts'
-      IconMaterial: 'PAPER'
-      Magic-Cost: 1000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'hit'
-    GuardianAngel:
-      SpellName: '&eGuardian Angel'
-      Description: '&eNext time the target is about to die they will be given a second chance'
-      IconMaterial: 'WHITE_WOOL'
-      Magic-Cost: 5000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'hit'
-    Cure:
-      SpellName: '&eCure'
-      Description: '&eCreates a concoction that when consumed turns the consumer into a Human'
-      IconMaterial: 'BAMBOO'
-      Magic-Cost: 5000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    HolyBook:
-      SpellName: '&eHoly Book'
-      Description: '&eCreates a book that when read turns the reader into a Priest'
-      IconMaterial: 'BOOK'
-      Magic-Cost: 10000
-      Food-Cost: 0
-      Health-Cost: 10
-      Cooldown: 0
-      TriggerMethod: 'right'
+    Prefix: '&f[&ePriest&f]'
+    ActiveAbilities:
+      Banish:
+        SpellName: '&eBanish'
+        Description: '&eSends the target to the banish location'
+        IconMaterial: 'IRON_BARS'
+        Magic-Cost: 5500
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+        Range: 20
+      Exorcise:
+        SpellName: '&eExorcise'
+        Description: '&eTurns the target back into a human'
+        IconMaterial: 'FLINT_AND_STEEL'
+        Magic-Cost: 10000
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+        Range: 20
+      Drain:
+        SpellName: '&eDrain'
+        Description: '&eDrains 15% of the targets magic'
+        IconMaterial: 'STICK'
+        Magic-Cost: 1250
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+        Range: 20
+      HealHuman:
+        SpellName: '&eHeal Human'
+        Description: '&eIncreases the targets health by 0-5 hearts'
+        IconMaterial: 'PAPER'
+        Magic-Cost: 1500
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'hit'
+      GuardianAngel:
+        SpellName: '&eGuardian Angel'
+        Description: '&eNext time the target is about to die they will be given a second chance'
+        IconMaterial: 'WHITE_WOOL'
+        Magic-Cost: 6500
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'hit'
+      Cure:
+        SpellName: '&eCure'
+        Description: '&eCreates a concoction that when consumed turns the consumer into a Human'
+        IconMaterial: 'BAMBOO'
+        Magic-Cost: 3750
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      HolyBook:
+        SpellName: '&eHoly Book'
+        Description: '&eCreates a book that when read turns the reader into a Priest'
+        IconMaterial: 'BOOK'
+        Magic-Cost: 10000
+        Food-Cost: 0
+        Health-Cost: 10
+        Cooldown: 0
+        TriggerMethod: 'right'
+    PassiveAbilities:
   Necromancer:
-    SummonSkeleton:
-      SpellName: '&eSummon Skeleton'
-      Description: '&eSummons a Skeleton Follower'
-      IconMaterial: 'BONE'
-      Magic-Cost: 1000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    SummonUndead:
-      SpellName: '&eSummon Undead'
-      Description: '&eSummons a random Undead Follower'
-      IconMaterial: 'ROTTEN_FLESH'
-      Magic-Cost: 5000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    HealUndead:
-      SpellName: '&eHeal Undead'
-      Description: '&eHeals nearby Undead'
-      IconMaterial: 'RED_DYE'
-      Magic-Cost: 3500
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    SetRessurectionSpawn:
-      SpellName: '&eSet Resurection Spawn'
-      Description: '&eSets next respawn locations'
-      IconMaterial: 'BONE_MEAL'
-      Magic-Cost: 4000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    BookOfDeath:
-      SpellName: '&eBook of Death'
-      Description: '&eCreates a book that when read turns the reader into a Necromancer'
-      IconMaterial: 'BOOK'
-      Magic-Cost: 10000
-      Food-Cost: 0
-      Health-Cost: 10
-      Cooldown: 0
-      TriggerMethod: 'right'
+    Prefix: '&f[&1Necromancer&f]'
+    ActiveAbilities:
+      SummonSkeleton:
+        SpellName: '&eSummon Skeleton'
+        Description: '&eSummons a Skeleton Follower'
+        IconMaterial: 'BONE'
+        Magic-Cost: 2500
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      SummonUndead:
+        SpellName: '&eSummon Undead'
+        Description: '&eSummons a random Undead Follower'
+        IconMaterial: 'ROTTEN_FLESH'
+        Magic-Cost: 5000
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      HealUndead:
+        SpellName: '&eHeal Undead'
+        Description: '&eHeals nearby Undead'
+        IconMaterial: 'RED_DYE'
+        Magic-Cost: 350
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      SetRessurectionSpawn:
+        SpellName: '&eSet Resurection Spawn'
+        Description: '&eSets next respawn locations'
+        IconMaterial: 'BONE_MEAL'
+        Magic-Cost: 8500
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      BookOfDeath:
+        SpellName: '&eBook of Death'
+        Description: '&eCreates a book that when read turns the reader into a Necromancer'
+        IconMaterial: 'BOOK'
+        Magic-Cost: 10000
+        Food-Cost: 0
+        Health-Cost: 10
+        Cooldown: 0
+        TriggerMethod: 'right'
+    PassiveAbilities:
   WitchHunter:
-    ArrowSwitcher:
-      SpellName: '&eArrow Switcher'
-      Description: '&eSwitches between arrow types'
-      IconMaterial: 'BOW'
-      Magic-Cost: 0
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'left'
-    TripleArrow:
-      SpellName: '&eTriple Arrow'
-      Description: '&eFires 3 arrows next to eachother'
-      IconMaterial: 'BOW'
-      Magic-Cost: 300
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'shoot'
-    GrappleArrow:
-      SpellName: '&eGrapple Arrow'
-      Description: '&ePulls you to wherever your arrow lands'
-      IconMaterial: 'BOW'
-      Magic-Cost: 500
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'shoot'
-    FireArrow:
-      SpellName: '&eFire Arrow'
-      Description: '&eSets whatever you hit on fire'
-      IconMaterial: 'BOW'
-      Magic-Cost: 500
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'shoot'
-    PowerArrow:
-      SpellName: '&ePower Arrow'
-      Description: '&eCauses an explosion'
-      IconMaterial: 'BOW'
-      Magic-Cost: 500
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 80
-      TriggerMethod: 'shoot'
-    VolleyArrow:
-      SpellName: '&eVolley Arrow'
-      Description: &eShoots multiple consecutive arrows''
-      IconMaterial: 'BOW'
-      Magic-Cost: 300
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 80
-      TriggerMethod: 'shoot'
-    BookOfWitchHunter:
-      SpellName: '&eCreate Book of the Witch Hunter'
-      Description: ''
-      IconMaterial: 'BOOK'
-      Magic-Cost: 10000
-      Food-Cost: 0
-      Health-Cost: 10
-      Cooldown: 0
-      TriggerMethod: 'right'
+    Prefix: '&f[&5Witchhunter&f]'
+    ActiveAbilities:
+      ArrowSwitcher:
+        SpellName: '&eArrow Switcher'
+        Description: '&eSwitches between arrow types'
+        IconMaterial: 'BOW'
+        Magic-Cost: 0
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'left'
+      TripleArrow:
+        SpellName: '&eTriple Arrow'
+        Description: '&eFires 3 arrows next to eachother'
+        IconMaterial: 'BOW'
+        Magic-Cost: 350
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'shoot'
+      GrappleArrow:
+        SpellName: '&eGrapple Arrow'
+        Description: '&ePulls you to wherever your arrow lands'
+        IconMaterial: 'BOW'
+        Magic-Cost: 2500
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'shoot'
+      FireArrow:
+        SpellName: '&eFire Arrow'
+        Description: '&eSets whatever you hit on fire'
+        IconMaterial: 'BOW'
+        Magic-Cost: 250
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'shoot'
+      PowerArrow:
+        SpellName: '&ePower Arrow'
+        Description: '&eCauses an explosion'
+        IconMaterial: 'BOW'
+        Magic-Cost: 1750
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 80
+        TriggerMethod: 'shoot'
+      VolleyArrow:
+        SpellName: '&eVolley Arrow'
+        Description: &eShoots multiple consecutive arrows''
+        IconMaterial: 'BOW'
+        Magic-Cost: 750
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 80
+        TriggerMethod: 'shoot'
+      BookOfWitchHunter:
+        SpellName: '&eCreate Book of the Witch Hunter'
+        Description: ''
+        IconMaterial: 'BOOK'
+        Magic-Cost: 10000
+        Food-Cost: 0
+        Health-Cost: 10
+        Cooldown: 0
+        TriggerMethod: 'right'
+    PassiveAbilities:
   Angel:
-    HolySmite:
-      SpellName: '&eHoly Smite'
-      Description: '&eSpell WIP'
-      IconMaterial: 'BONE_MEAL'
-      Magic-Cost: 1000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    Taunt:
-      SpellName: '&eTaunt'
-      Description: '&eSpell WIP'
-      IconMaterial: 'LEAD'
-      Magic-Cost: 6000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    HolyBlessing:
-      SpellName: '&eHoly Blessing'
-      Description: '&eSpell WIP'
-      IconMaterial: 'DANDELION'
-      Magic-Cost: 3000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
-    Wings:
-      SpellName: '&eWings'
-      Description: '&eMakes the caster glide for the next 20 seconds'
-      IconMaterial: 'FEATHER'
-      Magic-Cost: 5000
-      Food-Cost: 0
-      Health-Cost: 0
-      Cooldown: 0
-      TriggerMethod: 'right'
+    Prefix: '&f[&eAngel&f]'
+    ActiveAbilities:
+      HolySmite:
+        SpellName: '&eHoly Smite'
+        Description: '&eSpell WIP'
+        IconMaterial: 'BONE_MEAL'
+        Magic-Cost: 1250
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      Taunt:
+        SpellName: '&eTaunt'
+        Description: '&eSpell WIP'
+        IconMaterial: 'LEAD'
+        Magic-Cost: 700
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      HolyBlessing:
+        SpellName: '&eHoly Blessing'
+        Description: '&eSpell WIP'
+        IconMaterial: 'DANDELION'
+        Magic-Cost: 6000
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+      Wings:
+        SpellName: '&eWings'
+        Description: '&eMakes the caster glide for the next 20 seconds'
+        IconMaterial: 'FEATHER'
+        Magic-Cost: 5000
+        Food-Cost: 0
+        Health-Cost: 0
+        Cooldown: 0
+        TriggerMethod: 'right'
+    PassiveAbilities:
+  Shade:
+    Prefix: '&f[&7Shade&f]'
+    ActiveAbilities:
+    PassiveAbilities:
+  Siren:
+    Prefix: '&f[&3Siren&f]'
+    ActiveAbilities:
+    PassiveAbilities:
+  EarthElemental:
+    Prefix: '&f[&2Earth Elemental&f]'
+    ActiveAbilities:
+    PassiveAbilities:
+  WaterElemental:
+    Prefix: '&f[&bWater Elemental&f]'
+    ActiveAbilities:
+    PassiveAbilities:
+  FireElemental:
+    Prefix: '&f[&6Fire Elemental&f]'
+    ActiveAbilities:
+    PassiveAbilities:
