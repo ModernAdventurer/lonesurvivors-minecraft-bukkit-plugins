@@ -2,6 +2,7 @@ package me.LoneSurvivor.Supernatural.Classes.Ghoul.ActiveAbilities;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -15,11 +16,11 @@ public class UnholyBond {
 		supernatural.setMagic(p, supernatural.getMagic(p) - supernatural.getConfig().getInt("Spells.Ghoul.UnholyBond.Magic-Cost"), false);
 		p.setFoodLevel(p.getFoodLevel() - supernatural.getConfig().getInt("Spells.Ghoul.UnholyBond.Food-Cost"));
 		p.setHealth(p.getHealth() - supernatural.getConfig().getInt("Spells.Ghoul.UnholyBond.Health-Cost"));
-		Map<Player, Map<LivingEntity, Integer>> UnholyBond = supernatural.getUnholyBond();
-		Map<LivingEntity, Integer> TaggedEntities = new HashMap<LivingEntity, Integer>();
-		if(UnholyBond.containsKey(p)) TaggedEntities = UnholyBond.get(p);
-		TaggedEntities.put(t, 3000); //2.5 mins
-		UnholyBond.put(p, TaggedEntities);
+		Map<UUID, Map<UUID, Integer>> UnholyBond = supernatural.getUnholyBond();
+		Map<UUID, Integer> TaggedEntities = new HashMap<UUID, Integer>();
+		if(UnholyBond.containsKey(p.getUniqueId())) TaggedEntities = UnholyBond.get(p.getUniqueId());
+		TaggedEntities.put(t.getUniqueId(), 3000); //2.5 mins
+		UnholyBond.put(p.getUniqueId(), TaggedEntities);
 		supernatural.setUnholyBond(UnholyBond);
 	}
 }

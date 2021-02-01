@@ -100,7 +100,7 @@ public class Supernatural extends JavaPlugin implements Listener {
     private Economy eco;
     private Chat chat;
     Boolean VaultChat = true;
-    Map < Player, Map < LivingEntity, Integer > > UnholyBond = new HashMap < Player, Map < LivingEntity, Integer > > ();
+    Map < UUID, Map < UUID, Integer > > UnholyBond = new HashMap < UUID, Map < UUID, Integer > > ();
     public DataManager data = new DataManager(this);
     public Constants constants = new Constants(this);
     FileConfiguration config = this.getConfig();
@@ -143,20 +143,18 @@ public class Supernatural extends JavaPlugin implements Listener {
         	getServer().getPluginManager().disablePlugin(this);
         }
 
-		//init commands
+		//Init commands
 		Commands commands = new Commands(this, eco);
 		getCommand("supernatural").setExecutor(commands);
 		getCommand("sn").setExecutor(commands);
 		getCommand("bounty").setExecutor(commands);
         
-        //Setup ArmorEquipEvent
-		getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
-		try {
-			Class.forName("org.bukkit.event.block.BlockDispenseArmorEvent");
-			getServer().getPluginManager().registerEvents(new DispenserArmorListener(), this);
-		} catch(Exception ignored) {}
+		if(!setupArmourEquipEvent()) {
+        	this.getLogger().log(Level.SEVERE, "Setup Armour Equip Event Failed");
+        	getServer().getPluginManager().disablePlugin(this);
+		}
 		
-	    //Setup Repeating Checks
+	    //Setup Repeating Tasks
     	this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
     		int tick=0;
             public void run() {
@@ -174,9 +172,9 @@ public class Supernatural extends JavaPlugin implements Listener {
             			if(tick % config.getInt("RunnableFrequency.GrappleArrowTeleport") == 0) GrappleArrowStage2(player);
         				//if(tick % config.getInt("RunnableFrequency.LavaSwimStartStop") == 0) lavaswimstartstop(player);
             			//tick frequency critical 
-            			if(tick % 20 == 0) Regeneration(player);
+            			if(tick % config.getInt("Spells.Vampire.Regeneration.Frequency") == 0) Regeneration(player);
+        				if(tick % config.getInt("Spells.Vampire.WaterBreathing.Frequency") == 0) WaterBreathing(player); 		
         				if(tick % 20 == 0) MagicFromHeat(player);
-        				if(tick % 20 == 0) WaterBreathing(player); 		
             			if(tick % 20 == 0) waterContact(player);
             			inSunlight(player, tick);       		
         				UnholyBondTimer();
@@ -249,6 +247,18 @@ public class Supernatural extends JavaPlugin implements Listener {
         return eco != null;
     }
  	
+	private boolean setupArmourEquipEvent() {
+        //Setup ArmorEquipEvent
+		try {
+			getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
+			Class.forName("org.bukkit.event.block.BlockDispenseArmorEvent");
+			getServer().getPluginManager().registerEvents(new DispenserArmorListener(), this);
+			return true;
+		} catch(Exception e) {
+			return false;
+		}
+	}
+	
 	@EventHandler
     public void PlayerChat(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
@@ -535,11 +545,11 @@ public class Supernatural extends JavaPlugin implements Listener {
 		WaterBreathing.put(player, bool);
 	}
 
-	public Map < Player, Map < LivingEntity, Integer > > getUnholyBond() {
+	public Map < UUID, Map < UUID, Integer > > getUnholyBond() {
 		return UnholyBond;
 	}
 	
-	public void setUnholyBond(Map < Player, Map < LivingEntity, Integer > > map) {
+	public void setUnholyBond(Map < UUID, Map < UUID, Integer > > map) {
 		UnholyBond = map;
 	}
 	
@@ -558,8 +568,10 @@ public class Supernatural extends JavaPlugin implements Listener {
 			if(EventItem.equals(constants.getSpellIcons().get("Teleport")) && this.triggerRequirements(p, action, "SetTeleportLocation")) new SetTeleportLocation(this, constants, p);
 			if(EventItem.equals(constants.getSpellIcons().get("Teleport")) && this.triggerRequirements(p, action, "Teleport")) new Teleport(this, constants, p);
 			if(EventItem.equals(constants.getSpellIcons().get("HighJump")) && this.triggerRequirements(p, action, "HighJump")) new HighJump(this, constants, p);
-			if((EventItem.equals(constants.getSpellIcons().get("ToggleRegenerationEnabled")) || EventItem.equals(constants.getSpellIcons().get("ToggleRegenerationDisabled"))) && this.triggerRequirements(p, action, "ToggleRegeneration")) new ToggleRegen(this, constants, p);
-			if((EventItem.equals(constants.getSpellIcons().get("ToggleWaterBreathingEnabled")) || EventItem.equals(constants.getSpellIcons().get("ToggleWaterBreathingDisabled"))) && this.triggerRequirements(p, action, "ToggleWaterBreathing")) new ToggleWaterBreathing(this, constants, p);
+			if(EventItem.equals(constants.getSpellIcons().get("ToggleRegenerationEnabled")) && this.triggerRequirements(p, action, "ToggleRegenerationEnabled")) new ToggleRegen(this, constants, p);
+			if(EventItem.equals(constants.getSpellIcons().get("ToggleRegenerationDisabled")) && this.triggerRequirements(p, action, "ToggleRegenerationDisabled")) new ToggleRegen(this, constants, p);
+			if(EventItem.equals(constants.getSpellIcons().get("ToggleWaterBreathingEnabled")) && this.triggerRequirements(p, action, "ToggleWaterBreathingEnabled")) new ToggleWaterBreathing(this, constants, p);
+			if(EventItem.equals(constants.getSpellIcons().get("ToggleWaterBreathingDisabled")) && this.triggerRequirements(p, action, "ToggleWaterBreathingDisabled")) new ToggleWaterBreathing(this, constants, p);
 			if(EventItem.equals(constants.getSpellIcons().get("Bloodvial")) && this.triggerRequirements(p, action, "Bloodvial")) new Bloodvial(this, constants, p);
 			if(EventItem.equals(constants.getSpellIcons().get("Bloodrose")) && this.triggerRequirements(p, action, "Bloodrose")) new Bloodrose(this, constants, p);
 		}
@@ -1696,6 +1708,20 @@ public class Supernatural extends JavaPlugin implements Listener {
 			}
 		}
 		
+		//UnholyBond Effect
+		if(event.getEntity() instanceof Player) {
+			UUID VictimUUID = event.getEntity().getUniqueId();
+			if (event.getDamager() instanceof LivingEntity) {
+				UUID DamagerUUID = event.getEntity().getUniqueId();
+				if(UnholyBond.containsKey(VictimUUID)) {
+					Map<UUID, Integer> TaggedEntities = UnholyBond.get(VictimUUID);
+					if(TaggedEntities.containsKey(DamagerUUID)) {
+						event.setDamage(event.getDamage()/4);
+					}
+				}
+			}
+		}
+		
 		//Supernatural Infectivity
 		if((event.getEntity() instanceof Player)) {
 			Player victim = (Player) event.getEntity();
@@ -2109,25 +2135,19 @@ public class Supernatural extends JavaPlugin implements Listener {
 	}
 	
 	//Vampire
-	
+
 	public void VampireRegeneration(Player player) {
 		String race = getRace(player);
 		if(race.equalsIgnoreCase("Vampire")) {
-			if(!Regeneration.containsKey(player)) {
-				Regeneration.put(player, false);
-			}
-			if(!Regeneration.get(player)) {
-				return;
-			}
-			//If not at full health
-			if(player.getHealth() == 20 || player.getHealth() == 0) {
-				return;
-			}
-			
-			if(getMagic(player) < this.getConfig().getInt("Spells.Vampire.Regeneration.Cost")) {
-				return;
-			}
-			setMagic(player, getMagic(player) - this.getConfig().getInt("Spells.Vampire.Regeneration.Cost"), false);
+			if(!Regeneration.containsKey(player)) Regeneration.put(player, false);
+			if(!Regeneration.get(player)) return;
+			if(player.getHealth() == 20 || player.getHealth() == 0) return;
+			if(getMagic(player) < this.getConfig().getInt("Spells.Vampire.Regeneration.Magic-Cost")) return;
+			if(player.getFoodLevel() < this.getConfig().getInt("Spells.Vampire.Regeneration.Food-Cost")) return;
+			if(player.getHealth() <= this.getConfig().getInt("Spells.Vampire.Regeneration.Health-Cost")) return;
+			setMagic(player, getMagic(player) - this.getConfig().getInt("Spells.Vampire.Regeneration.Magic-Cost"), false);
+			player.setFoodLevel(player.getFoodLevel() - this.getConfig().getInt("Spells.Vampire.Regeneration.Food-Cost"));
+			player.setHealth(player.getHealth() - this.getConfig().getInt("Spells.Vampire.Regeneration.Health-Cost"));
 			
 			//Heal the player by half a heart
 			if(player.getHealth()+1<=20) {
@@ -2141,54 +2161,36 @@ public class Supernatural extends JavaPlugin implements Listener {
 	public void WaterBreathing(Player player) {
 		String race = getRace(player);
 		if(race.equalsIgnoreCase("Vampire")) {
-			if(!WaterBreathing.containsKey(player)) {
-				WaterBreathing.put(player, false);
-			}
-			if(!WaterBreathing.get(player)) {
-				return;
-			}
-			if(player.getRemainingAir()<300) {
-				if(getMagic(player) < this.getConfig().getInt("Spells.Vampire.WaterBreathing.Cost")) {
-					return;
-				}
-				setMagic(player, getMagic(player) - this.getConfig().getInt("Spells.Vampire.ToggleWaterBreathing.Cost"), false);
-				int air = player.getRemainingAir()+30;
-				if(air>300) air = 300;
-				player.setRemainingAir(air);
-			}
+			if(!WaterBreathing.containsKey(player)) WaterBreathing.put(player, false);
+			if(!WaterBreathing.get(player)) return;
+			if(player.getRemainingAir() == player.getMaximumAir()) return;
+			if(getMagic(player) < this.getConfig().getInt("Spells.Vampire.WaterBreathing.Magic-Cost")) return;
+			if(player.getFoodLevel() < this.getConfig().getInt("Spells.Vampire.WaterBreathing.Food-Cost")) return;
+			if(player.getHealth() <= this.getConfig().getInt("Spells.Vampire.WaterBreathing.Health-Cost")) return;
+			setMagic(player, getMagic(player) - this.getConfig().getInt("Spells.Vampire.WaterBreathing.Magic-Cost"), false);
+			player.setFoodLevel(player.getFoodLevel() - this.getConfig().getInt("Spells.Vampire.WaterBreathing.Food-Cost"));
+			player.setHealth(player.getHealth() - this.getConfig().getInt("Spells.Vampire.WaterBreathing.Health-Cost"));
+			int air = player.getRemainingAir() + 30;
+			if(air > player.getMaximumAir()) air = player.getMaximumAir();
+			player.setRemainingAir(air);
 		}
 	}
 	
 	//Ghoul
-
-	@EventHandler
-	public void UnholyBondEffect(EntityDamageByEntityEvent event) {
-		if(event.getEntity() instanceof Player) {
-			Player player = (Player) event.getEntity();
-			if (event.getEntity() instanceof LivingEntity) {
-				LivingEntity entity = (LivingEntity) event.getEntity();
-				Map<LivingEntity, Integer> TaggedEntities = new HashMap<LivingEntity, Integer>();
-				if(UnholyBond.containsKey(player)) TaggedEntities = UnholyBond.get(player);
-				if(TaggedEntities.containsKey(entity)) {
-					entity.damage(event.getDamage()/4);
-				}
-			}
-		}
-	}
 	
 	public void UnholyBondTimer() {
-		for(Player p : UnholyBond.keySet()) {
-			Map<LivingEntity, Integer> TaggedEntities = UnholyBond.get(p);
-			for(LivingEntity e : TaggedEntities.keySet()) {
-				int tick = TaggedEntities.get(e);
+		for(UUID TaggerUUID : UnholyBond.keySet()) {
+			Map<UUID, Integer> TaggedEntities = UnholyBond.get(TaggerUUID);
+			for(UUID VictimUUID : TaggedEntities.keySet()) {
+				int tick = TaggedEntities.get(VictimUUID);
 				tick = tick-1;
 				if(tick>0) {
-					TaggedEntities.put(e, tick);
+					TaggedEntities.put(VictimUUID, tick);
 				} else {
-					TaggedEntities.remove(e);
+					TaggedEntities.remove(VictimUUID);
 				}
 			}
-			UnholyBond.put(p, TaggedEntities);
+			UnholyBond.put(TaggerUUID, TaggedEntities);
 		}
 	}
 	
@@ -2314,7 +2316,6 @@ public class Supernatural extends JavaPlugin implements Listener {
 						event.setCancelled(true);
 						player.setHealth(8);
 						player.damage(1);
-						//event.setDamage(player.getHealth()-1);
 						for(PotionEffect effect : player.getActivePotionEffects()) {
 							player.removePotionEffect(effect.getType());
 						}
@@ -2339,7 +2340,6 @@ public class Supernatural extends JavaPlugin implements Listener {
 						event.setCancelled(true);
 						player.setHealth(8);
 						player.damage(1);
-						//event.setDamage(player.getHealth()-1);
 						for(PotionEffect effect : player.getActivePotionEffects()) {
 							player.removePotionEffect(effect.getType());
 						}
