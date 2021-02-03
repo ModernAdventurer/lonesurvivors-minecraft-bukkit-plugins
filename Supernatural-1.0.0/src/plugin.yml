@@ -1,0 +1,17 @@
+main: me.LoneSurvivor.Supernatural.Supernatural
+name: Supernatural
+version: 0.9.0 Build 7
+author: LoneSurvivor
+api-version: 1.16
+depend: [Vault]
+
+commands:
+  sn:
+    description: The Supernatural command
+    usage: /<command>
+  supernatural:
+    description: The Supernatural command
+    usage: /<command>
+  bounty:
+    description: The Supernatural Bounty command
+    usage: /<command>

@@ -459,66 +459,65 @@ public class Constants {
         return output;
     }     
     
-    private String ConstructLoreLine(String directory) {
-    	String line = "";
-		Boolean firstArgument = true;
-		int magicCost = supernatural.getConfig().getInt(directory + ".Magic-Cost");
-		int foodCost = supernatural.getConfig().getInt(directory + ".Food-Cost");
-		int healthCost = supernatural.getConfig().getInt(directory + ".Health-Cost");
-		String triggerMethod = supernatural.getConfig().getString(directory + ".TriggerMethod");
-    	if(triggerMethod.equals("right")) line += "&eRight Click to use ";
-    	if(triggerMethod.equals("left")) line += "&eLeft Click to use ";
-    	if(triggerMethod.equals("hit")) line += "&eHit to use ";
-    	if(triggerMethod.equals("shoot")) line += "&eShoot to use ";
-    	line += ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString(directory + ".SpellName")));
-		if(magicCost > 0) {
-			if(firstArgument) {
-				line += "&e - ";
-				firstArgument = false;
-			} else {
-				line += " & ";
-			}
-			line += magicCost + " Magika";
-		}
-		if(foodCost > 0) {
-			if(firstArgument) {
-				line += "&e - ";
-				firstArgument = false;
-			} else {
-				line += " & ";
-			}
-			line += foodCost + " Hunger";
-		}
-		if(healthCost > 0) {
-			if(firstArgument) {
-				line += "&e - ";
-				firstArgument = false;
-			} else {
-				line += " & ";
-			}
-			line += healthCost + " Health";
-		}
-		return line;
-    }
-    
     public ItemStack createSpellIcon(String[] spellInformation) {
     	try {
     		String directory = "Classes." + spellInformation[0].split(":")[0] + ".ActiveAbilities." + spellInformation[0].split(":")[1];
-    		ItemStack item = new ItemStack(Material.getMaterial(directory + ".IconMaterial"));
+    		ItemStack item = new ItemStack(Material.getMaterial(supernatural.getConfig().getString(directory + ".IconMaterial")));
         	ItemMeta meta = item.getItemMeta();
         	List<String> lore = new ArrayList<String>();
         	meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
     		meta.setUnbreakable(true);
         	meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
     		meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-    		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', directory + ".SpellName"));
+    		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString(directory + ".SpellName")));
 			lore.add(ChatColor.translateAlternateColorCodes('&', "&6----------------------"));
     		for(String spellInfo : spellInformation) {
     			directory = "Classes." + spellInfo.split(":")[0] + ".ActiveAbilities." + spellInfo.split(":")[1];
-    			lore.add(ChatColor.translateAlternateColorCodes('&', ConstructLoreLine(directory)));
+    			//Trigger & Spell Cost
+    	    	String line = "";
+    			Boolean firstArgument = true;
+    			int magicCost = supernatural.getConfig().getInt(directory + ".Magic-Cost");
+    			int foodCost = supernatural.getConfig().getInt(directory + ".Food-Cost");
+    			int healthCost = supernatural.getConfig().getInt(directory + ".Health-Cost");
+    			String triggerMethod = supernatural.getConfig().getString(directory + ".TriggerMethod");
+    	    	if(triggerMethod.equals("right")) line += "&eRight Click to use ";
+    	    	if(triggerMethod.equals("left")) line += "&eLeft Click to use ";
+    	    	if(triggerMethod.equals("hit")) line += "&eHit to use ";
+    	    	if(triggerMethod.equals("shoot")) line += "&eShoot to use ";
+    	    	line += ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString(directory + ".SpellName")));
+    			if(magicCost > 0) {
+    				if(firstArgument) {
+    					line += "&e - ";
+    					firstArgument = false;
+    				} else {
+    					line += " & ";
+    				}
+    				line += magicCost + " Magika";
+    			}
+    			if(foodCost > 0) {
+    				if(firstArgument) {
+    					line += "&e - ";
+    					firstArgument = false;
+    				} else {
+    					line += " & ";
+    				}
+    				line += foodCost + " Hunger";
+    			}
+    			if(healthCost > 0) {
+    				if(firstArgument) {
+    					line += "&e - ";
+    					firstArgument = false;
+    				} else {
+    					line += " & ";
+    				}
+    				line += healthCost + " Health";
+    			}
+    			lore.add(ChatColor.translateAlternateColorCodes('&', line));
+    			//Description
     			if(!supernatural.getConfig().getString(directory + ".Description").equals("")) {
     				lore.add(ChatColor.translateAlternateColorCodes('&', supernatural.getConfig().getString(directory + ".Description")));
     			}
+    			//Divider
     			lore.add(ChatColor.translateAlternateColorCodes('&', "&6----------------------"));
     		}
     		meta.setLore(lore);

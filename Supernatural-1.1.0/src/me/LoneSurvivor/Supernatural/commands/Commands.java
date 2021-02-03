@@ -2,6 +2,7 @@ package me.LoneSurvivor.Supernatural.commands;
 
 import me.LoneSurvivor.Supernatural.Supernatural;
 import me.LoneSurvivor.Supernatural.commands.subcommands.*;
+import me.LoneSurvivor.Supernatural.repositories.Constants;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.command.Command;
@@ -11,10 +12,12 @@ import org.bukkit.command.CommandSender;
 public class Commands implements CommandExecutor {
 
 	Supernatural supernatural;
+	Constants constants;
 	Economy eco;
 	
-    public Commands(Supernatural supernatural, Economy eco) {
+    public Commands(Supernatural supernatural, Constants constants, Economy eco) {
     	this.supernatural = supernatural;
+    	this.constants = constants;
     	this.eco = eco;
     }
 
@@ -39,8 +42,12 @@ public class Commands implements CommandExecutor {
             	new SetClassCommand(supernatural, sender, args);
             	return true;
             }
-            if (subCommand.equalsIgnoreCase("setmagic") || subCommand.equalsIgnoreCase("sm")) {
-            	new SetMagicCommand(supernatural, sender, args);
+            if (subCommand.equalsIgnoreCase("give") || subCommand.equalsIgnoreCase("giveitem") || subCommand.equalsIgnoreCase("givecustomitem") || subCommand.equalsIgnoreCase("customitem")) {
+            	new GiveCustomItemCommand(supernatural, constants, sender, args);
+            	return true;
+            }
+            if (subCommand.equalsIgnoreCase("magic") || subCommand.equalsIgnoreCase("magika")) {
+            	new MagicCommand(supernatural, sender, args);
             	return true;
             }
             if (subCommand.equalsIgnoreCase("class") || subCommand.equalsIgnoreCase("classes")) {

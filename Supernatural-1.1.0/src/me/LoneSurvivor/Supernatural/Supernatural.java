@@ -144,7 +144,7 @@ public class Supernatural extends JavaPlugin implements Listener {
         }
 
 		//Init commands
-		Commands commands = new Commands(this, eco);
+		Commands commands = new Commands(this, constants, eco);
 		getCommand("supernatural").setExecutor(commands);
 		getCommand("sn").setExecutor(commands);
 		getCommand("bounty").setExecutor(commands);

@@ -20,5 +20,6 @@ public class SummonSkeleton {
 		skeleton.setCustomNameVisible(true);
 		skeleton.getPersistentDataContainer().set(new NamespacedKey(supernatural, "Leader"), PersistentDataType.STRING, p.getUniqueId().toString());
 		skeleton.getPersistentDataContainer().set(new NamespacedKey(supernatural, "Following"), PersistentDataType.INTEGER, 1);
+		skeleton.setPersistent(true);
 	}
 }

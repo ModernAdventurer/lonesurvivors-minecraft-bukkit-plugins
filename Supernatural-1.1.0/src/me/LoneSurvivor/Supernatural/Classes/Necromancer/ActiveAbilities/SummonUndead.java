@@ -23,5 +23,6 @@ public class SummonUndead {
 		entity.setCustomNameVisible(true);
 		entity.getPersistentDataContainer().set(new NamespacedKey(supernatural, "Leader"), PersistentDataType.STRING, p.getUniqueId().toString());
 		entity.getPersistentDataContainer().set(new NamespacedKey(supernatural, "Following"), PersistentDataType.INTEGER, 1);
+		entity.setPersistent(true);
 	}
 }
